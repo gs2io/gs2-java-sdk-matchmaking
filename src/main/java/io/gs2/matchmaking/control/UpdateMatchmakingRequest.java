@@ -22,6 +22,8 @@ public class UpdateMatchmakingRequest extends Gs2BasicRequest<UpdateMatchmakingR
 	String description;
 	/** サービスクラス */
 	String serviceClass;
+	/** ギャザリングプール名 */
+	String gatheringPoolName;
 	/** コールバックURL */
 	String callback;
 
@@ -109,6 +111,35 @@ public class UpdateMatchmakingRequest extends Gs2BasicRequest<UpdateMatchmakingR
 	 */
 	public UpdateMatchmakingRequest withServiceClass(String serviceClass) {
 		setServiceClass(serviceClass);
+		return this;
+	}
+
+	/**
+	 * ギャザリングプール名を取得。
+	 * 
+	 * @return ギャザリングプール名
+	 */
+	public String getGatheringPoolName() {
+		return gatheringPoolName;
+	}
+	
+	/**
+	 * ギャザリングプール名を設定。
+	 * 
+	 * @param gatheringPoolName ギャザリングプール名
+	 */
+	public void setGatheringPoolName(String gatheringPoolName) {
+		this.gatheringPoolName = gatheringPoolName;
+	}
+	
+	/**
+	 * ギャザリングプール名を設定。
+	 * 
+	 * @param gatheringPoolName ギャザリングプール名
+	 * @return this
+	 */
+	public UpdateMatchmakingRequest withGatheringPoolName(String gatheringPoolName) {
+		setGatheringPoolName(gatheringPoolName);
 		return this;
 	}
 

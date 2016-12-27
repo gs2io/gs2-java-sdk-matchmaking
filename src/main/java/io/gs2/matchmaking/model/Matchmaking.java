@@ -28,6 +28,8 @@ public class Matchmaking implements Serializable {
 	Integer maxPlayer;
 	/** サービスクラス */
 	String serviceClass;
+	/** ギャザリングプール名 */
+	String gatheringPoolName;
 	/** コールバックURL */
 	String callback;
 	/** 登録日時 */
@@ -160,7 +162,25 @@ public class Matchmaking implements Serializable {
 	public void setServiceClass(String serviceClass) {
 		this.serviceClass = serviceClass;
 	}
-	
+
+	/**
+	 * ギャザリングプール名を取得
+	 * 
+	 * @return ギャザリングプール名
+	 */
+	public String getGatheringPoolName() {
+		return gatheringPoolName;
+	}
+
+	/**
+	 * ギャザリングプール名を設定
+	 * 
+	 * @param gatheringPoolName ギャザリングプール名
+	 */
+	public void setGatheringPoolName(String gatheringPoolName) {
+		this.gatheringPoolName = gatheringPoolName;
+	}
+
 	/**
 	 * コールバックURLを取得
 	 * 

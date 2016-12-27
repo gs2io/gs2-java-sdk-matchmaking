@@ -26,6 +26,8 @@ public class CreateMatchmakingRequest extends Gs2BasicRequest<CreateMatchmakingR
 	String type;
 	/** 最大プレイヤー数 */
 	Integer maxPlayer;
+	/** ギャザリングプール名 */
+	String gatheringPoolName;
 	/** コールバックURL */
 	String callback;
 
@@ -171,6 +173,35 @@ public class CreateMatchmakingRequest extends Gs2BasicRequest<CreateMatchmakingR
 	 */
 	public CreateMatchmakingRequest withMaxPlayer(Integer maxPlayer) {
 		setMaxPlayer(maxPlayer);
+		return this;
+	}
+
+	/**
+	 * ギャザリングプール名を取得。
+	 * 
+	 * @return ギャザリングプール名
+	 */
+	public String getGatheringPoolName() {
+		return gatheringPoolName;
+	}
+	
+	/**
+	 * ギャザリングプール名を設定。
+	 * 
+	 * @param gatheringPoolName ギャザリングプール名
+	 */
+	public void setGatheringPoolName(String gatheringPoolName) {
+		this.gatheringPoolName = gatheringPoolName;
+	}
+	
+	/**
+	 * ギャザリングプール名を設定。
+	 * 
+	 * @param gatheringPoolName ギャザリングプール名
+	 * @return this
+	 */
+	public CreateMatchmakingRequest withGatheringPoolName(String gatheringPoolName) {
+		setGatheringPoolName(gatheringPoolName);
 		return this;
 	}
 
