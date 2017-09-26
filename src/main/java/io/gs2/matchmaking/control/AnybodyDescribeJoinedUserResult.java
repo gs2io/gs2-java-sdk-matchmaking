@@ -2,12 +2,15 @@ package io.gs2.matchmaking.control;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Anybodyマッチメイキング - ギャザリングに参加しているユーザID一覧取得結果。
  * 
  * @author Game Server Services, Inc.
  *
  */
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class AnybodyDescribeJoinedUserResult {
 	
 	List<String> items;

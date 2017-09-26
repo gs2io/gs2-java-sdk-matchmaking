@@ -1,5 +1,7 @@
 package io.gs2.matchmaking.control;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import io.gs2.matchmaking.model.PasscodeGathering;
 
 /**
@@ -8,6 +10,7 @@ import io.gs2.matchmaking.model.PasscodeGathering;
  * @author Game Server Services, Inc.
  *
  */
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class PasscodeCreateGatheringResult {
 	
 	PasscodeGathering item;
