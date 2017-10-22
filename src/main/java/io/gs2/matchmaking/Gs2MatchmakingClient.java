@@ -115,7 +115,8 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 				.put("type", request.getType())
 				.put("maxPlayer", request.getMaxPlayer())
 				.put("gatheringPoolName", request.getGatheringPoolName())
-				.put("callback", request.getCallback());
+				.put("callback", request.getCallback())
+				.put("notificationGameName", request.getNotificationGameName());
 		HttpPost post = createHttpPost(
 				Gs2Constant.ENDPOINT_HOST + "/matchmaking", 
 				credential, 
@@ -192,7 +193,8 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 				.put("description", request.getDescription())
 				.put("serviceClass", request.getServiceClass())
 				.put("gatheringPoolName", request.getGatheringPoolName())
-				.put("callback", request.getCallback());
+				.put("callback", request.getCallback())
+				.put("notificationGameName", request.getNotificationGameName());
 		HttpPut put = createHttpPut(
 				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + request.getMatchmakingName(), 
 				credential, 

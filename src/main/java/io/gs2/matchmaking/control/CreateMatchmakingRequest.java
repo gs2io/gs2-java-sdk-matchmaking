@@ -28,6 +28,8 @@ public class CreateMatchmakingRequest extends Gs2BasicRequest<CreateMatchmakingR
 	Integer maxPlayer;
 	/** ギャザリングプール名 */
 	String gatheringPoolName;
+	/** GS2-InGamePushNotification ゲーム名 */
+	String notificationGameName;
 	/** コールバックURL */
 	String callback;
 
@@ -202,6 +204,35 @@ public class CreateMatchmakingRequest extends Gs2BasicRequest<CreateMatchmakingR
 	 */
 	public CreateMatchmakingRequest withGatheringPoolName(String gatheringPoolName) {
 		setGatheringPoolName(gatheringPoolName);
+		return this;
+	}
+
+	/**
+	 * GS2-InGamePushNotification ゲーム名を取得
+	 *
+	 * @return GS2-InGamePushNotification ゲーム名
+	 */
+	public String getNotificationGameName() {
+		return notificationGameName;
+	}
+
+	/**
+	 * GS2-InGamePushNotification ゲーム名を設定
+	 *
+	 * @param notificationGameName GS2-InGamePushNotification ゲーム名
+	 */
+	public void setNotificationGameName(String notificationGameName) {
+		this.notificationGameName = notificationGameName;
+	}
+
+	/**
+	 * GS2-InGamePushNotification ゲーム名を設定。
+	 *
+	 * @param notificationGameName GS2-InGamePushNotification ゲーム名
+	 * @return this
+	 */
+	public CreateMatchmakingRequest withNotificationGameName(String notificationGameName) {
+		setNotificationGameName(notificationGameName);
 		return this;
 	}
 

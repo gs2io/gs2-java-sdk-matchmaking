@@ -30,6 +30,8 @@ public class Matchmaking implements Serializable {
 	String serviceClass;
 	/** ギャザリングプール名 */
 	String gatheringPoolName;
+	/** GS2-InGamePushNotification ゲーム名 */
+	String notificationGameName;
 	/** コールバックURL */
 	String callback;
 	/** 登録日時 */
@@ -179,6 +181,24 @@ public class Matchmaking implements Serializable {
 	 */
 	public void setGatheringPoolName(String gatheringPoolName) {
 		this.gatheringPoolName = gatheringPoolName;
+	}
+
+	/**
+	 * GS2-InGamePushNotification ゲーム名を取得
+	 *
+	 * @return GS2-InGamePushNotification ゲーム名
+	 */
+	public String getNotificationGameName() {
+		return notificationGameName;
+	}
+
+	/**
+	 * GS2-InGamePushNotification ゲーム名を設定
+	 *
+	 * @param notificationGameName GS2-InGamePushNotification ゲーム名
+	 */
+	public void setNotificationGameName(String notificationGameName) {
+		this.notificationGameName = notificationGameName;
 	}
 
 	/**
