@@ -1,12 +1,28 @@
+/*
+ * Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
+ * Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
 package io.gs2.matchmaking.model;
 
+import java.util.List;
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * マッチメイキング
- * 
+ * Roomマッチメイキング ギャザリング
+ *
  * @author Game Server Services, Inc.
  *
  */
@@ -14,84 +30,141 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class RoomGathering implements Serializable {
 
-	/** ギャザリングID */
-	String gatheringId;
-	/** メタデータ */
-	String meta;
+	/** ギャザリングメタデータ
+ルームの募集条件などを 128バイト以内で指定できます。
+ */
+	private String meta;
+
+	/** ギャザリングGRN */
+	private String gatheringId;
+
+	/** ギャザリングを作成したユーザID */
+	private String ownerUserId;
+
+	/** 更新日時(エポック秒) */
+	private Integer updateAt;
+
 	/** 参加プレイヤー数 */
-	Integer joinPlayer;
-	/** 更新日時 */
-	Long updateAt;
-	
+	private Integer joinPlayer;
+
+	/** 作成日時(エポック秒) */
+	private Integer createAt;
+
+
 	/**
-	 * ギャザリングIDを取得
-	 * 
-	 * @return ギャザリングID
-	 */
-	public String getGatheringId() {
-		return gatheringId;
-	}
-	
-	/**
-	 * ギャザリングIDを設定
-	 * 
-	 * @param gatheringId ギャザリングID
-	 */
-	public void setGatheringId(String gatheringId) {
-		this.gatheringId = gatheringId;
-	}
-	
-	/**
-	 * メタデータを取得
-	 * 
-	 * @return メタデータ
+	 * ギャザリングメタデータ
+ルームの募集条件などを 128バイト以内で指定できます。
+を取得
+	 *
+	 * @return ギャザリングメタデータ
+ルームの募集条件などを 128バイト以内で指定できます。
+
 	 */
 	public String getMeta() {
 		return meta;
 	}
-	
+
 	/**
-	 * メタデータを設定
-	 * 
-	 * @param meta メタデータ
+	 * ギャザリングメタデータ
+ルームの募集条件などを 128バイト以内で指定できます。
+を設定
+	 *
+	 * @param meta ギャザリングメタデータ
+ルームの募集条件などを 128バイト以内で指定できます。
+
 	 */
 	public void setMeta(String meta) {
 		this.meta = meta;
 	}
-	
+
+	/**
+	 * ギャザリングGRNを取得
+	 *
+	 * @return ギャザリングGRN
+	 */
+	public String getGatheringId() {
+		return gatheringId;
+	}
+
+	/**
+	 * ギャザリングGRNを設定
+	 *
+	 * @param gatheringId ギャザリングGRN
+	 */
+	public void setGatheringId(String gatheringId) {
+		this.gatheringId = gatheringId;
+	}
+
+	/**
+	 * ギャザリングを作成したユーザIDを取得
+	 *
+	 * @return ギャザリングを作成したユーザID
+	 */
+	public String getOwnerUserId() {
+		return ownerUserId;
+	}
+
+	/**
+	 * ギャザリングを作成したユーザIDを設定
+	 *
+	 * @param ownerUserId ギャザリングを作成したユーザID
+	 */
+	public void setOwnerUserId(String ownerUserId) {
+		this.ownerUserId = ownerUserId;
+	}
+
+	/**
+	 * 更新日時(エポック秒)を取得
+	 *
+	 * @return 更新日時(エポック秒)
+	 */
+	public Integer getUpdateAt() {
+		return updateAt;
+	}
+
+	/**
+	 * 更新日時(エポック秒)を設定
+	 *
+	 * @param updateAt 更新日時(エポック秒)
+	 */
+	public void setUpdateAt(Integer updateAt) {
+		this.updateAt = updateAt;
+	}
+
 	/**
 	 * 参加プレイヤー数を取得
-	 * 
+	 *
 	 * @return 参加プレイヤー数
 	 */
 	public Integer getJoinPlayer() {
 		return joinPlayer;
 	}
-	
+
 	/**
 	 * 参加プレイヤー数を設定
-	 * 
+	 *
 	 * @param joinPlayer 参加プレイヤー数
 	 */
 	public void setJoinPlayer(Integer joinPlayer) {
 		this.joinPlayer = joinPlayer;
 	}
-	
+
 	/**
-	 * 更新日時を取得
-	 * 
-	 * @return 更新日時
+	 * 作成日時(エポック秒)を取得
+	 *
+	 * @return 作成日時(エポック秒)
 	 */
-	public Long getUpdateAt() {
-		return updateAt;
+	public Integer getCreateAt() {
+		return createAt;
 	}
-	
+
 	/**
-	 * 更新日時を設定
-	 * 
-	 * @param updateAt 更新日時
+	 * 作成日時(エポック秒)を設定
+	 *
+	 * @param createAt 作成日時(エポック秒)
 	 */
-	public void setUpdateAt(Long updateAt) {
-		this.updateAt = updateAt;
+	public void setCreateAt(Integer createAt) {
+		this.createAt = createAt;
 	}
+
 }

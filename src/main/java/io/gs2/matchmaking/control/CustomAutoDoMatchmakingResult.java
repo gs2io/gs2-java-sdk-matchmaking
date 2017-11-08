@@ -1,107 +1,94 @@
+/*
+ * Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
+ * Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
 package io.gs2.matchmaking.control;
 
+import org.json.JSONObject;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import io.gs2.matchmaking.model.CustomAutoGathering;
+import io.gs2.matchmaking.model.*;
 
 /**
- * CustomAutoマッチメイキングの実行結果。
- * 
  * @author Game Server Services, Inc.
- *
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class CustomAutoDoMatchmakingResult {
-	
-	Boolean done;
-	CustomAutoGathering item;
-	String searchContext;
+
+	/** 検索を再開するためのコンテキスト */
+	private String searchContext;
+
+	/** CustomAutoマッチメイキング ギャザリング */
+	private CustomAutoGathering item;
+
+	/** マッチメイキングが完了したか */
+	private Boolean done;
+
 
 	/**
-	 * マッチメイキング完了を取得。
-	 * 
-	 * @return マッチメイキング完了
-	 */
-	public Boolean getDone() {
-		return done;
-	}
-	
-	/**
-	 * マッチメイキング完了を設定。
-	 * 
-	 * @param done マッチメイキング完了
-	 */
-	public void setDone(Boolean done) {
-		this.done = done;
-	}
-	
-	/**
-	 * マッチメイキング完了を設定。
-	 * 
-	 * @param done マッチメイキング完了
-	 * @return this
-	 */
-	public CustomAutoDoMatchmakingResult withDone(Boolean done) {
-		setDone(done);
-		return this;
-	}
-
-	/**
-	 * ギャザリングを取得。
-	 * 
-	 * @return ギャザリング
-	 */
-	public CustomAutoGathering getItem() {
-		return item;
-	}
-	
-	/**
-	 * ギャザリングを設定。
-	 * 
-	 * @param item ギャザリング
-	 */
-	public void setItem(CustomAutoGathering item) {
-		this.item = item;
-	}
-	
-	/**
-	 * ギャザリングを設定。
-	 * 
-	 * @param item ギャザリング
-	 * @return this
-	 */
-	public CustomAutoDoMatchmakingResult withItem(CustomAutoGathering item) {
-		setItem(item);
-		return this;
-	}
-
-	/**
-	 * 検索コンテキストを取得。
-	 * 
-	 * @return 検索コンテキスト
+	 * 検索を再開するためのコンテキストを取得
+	 *
+	 * @return 検索を再開するためのコンテキスト
 	 */
 	public String getSearchContext() {
 		return searchContext;
 	}
-	
+
 	/**
-	 * 検索コンテキストを設定。
-	 * 
-	 * @param searchContext 検索コンテキスト
+	 * 検索を再開するためのコンテキストを設定
+	 *
+	 * @param searchContext 検索を再開するためのコンテキスト
 	 */
 	public void setSearchContext(String searchContext) {
 		this.searchContext = searchContext;
 	}
-	
+
 	/**
-	 * 検索コンテキストを設定。
-	 * 
-	 * @param searchContext 検索コンテキスト
-	 * @return this
+	 * CustomAutoマッチメイキング ギャザリングを取得
+	 *
+	 * @return CustomAutoマッチメイキング ギャザリング
 	 */
-	public CustomAutoDoMatchmakingResult withSearchContext(String searchContext) {
-		setSearchContext(searchContext);
-		return this;
+	public CustomAutoGathering getItem() {
+		return item;
+	}
+
+	/**
+	 * CustomAutoマッチメイキング ギャザリングを設定
+	 *
+	 * @param item CustomAutoマッチメイキング ギャザリング
+	 */
+	public void setItem(CustomAutoGathering item) {
+		this.item = item;
+	}
+
+	/**
+	 * マッチメイキングが完了したかを取得
+	 *
+	 * @return マッチメイキングが完了したか
+	 */
+	public Boolean getDone() {
+		return done;
+	}
+
+	/**
+	 * マッチメイキングが完了したかを設定
+	 *
+	 * @param done マッチメイキングが完了したか
+	 */
+	public void setDone(Boolean done) {
+		this.done = done;
 	}
 
 }

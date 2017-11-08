@@ -1,12 +1,28 @@
+/*
+ * Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
+ * Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
 package io.gs2.matchmaking.model;
 
+import java.util.List;
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * マッチメイキング
- * 
+ * Anybodyマッチメイキング ギャザリング
+ *
  * @author Game Server Services, Inc.
  *
  */
@@ -14,64 +30,89 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class AnybodyGathering implements Serializable {
 
-	/** ギャザリングID */
-	String gatheringId;
+	/** 作成日時(エポック秒) */
+	private Integer createAt;
+
+	/** 更新日時(エポック秒) */
+	private Integer updateAt;
+
 	/** 参加プレイヤー数 */
-	Integer joinPlayer;
-	/** 更新日時 */
-	Long updateAt;
-	
+	private Integer joinPlayer;
+
+	/** ギャザリングGRN */
+	private String gatheringId;
+
+
 	/**
-	 * ギャザリングIDを取得
-	 * 
-	 * @return ギャザリングID
+	 * 作成日時(エポック秒)を取得
+	 *
+	 * @return 作成日時(エポック秒)
 	 */
-	public String getGatheringId() {
-		return gatheringId;
+	public Integer getCreateAt() {
+		return createAt;
 	}
-	
+
 	/**
-	 * ギャザリングIDを設定
-	 * 
-	 * @param gatheringId ギャザリングID
+	 * 作成日時(エポック秒)を設定
+	 *
+	 * @param createAt 作成日時(エポック秒)
 	 */
-	public void setGatheringId(String gatheringId) {
-		this.gatheringId = gatheringId;
+	public void setCreateAt(Integer createAt) {
+		this.createAt = createAt;
 	}
-	
+
+	/**
+	 * 更新日時(エポック秒)を取得
+	 *
+	 * @return 更新日時(エポック秒)
+	 */
+	public Integer getUpdateAt() {
+		return updateAt;
+	}
+
+	/**
+	 * 更新日時(エポック秒)を設定
+	 *
+	 * @param updateAt 更新日時(エポック秒)
+	 */
+	public void setUpdateAt(Integer updateAt) {
+		this.updateAt = updateAt;
+	}
+
 	/**
 	 * 参加プレイヤー数を取得
-	 * 
+	 *
 	 * @return 参加プレイヤー数
 	 */
 	public Integer getJoinPlayer() {
 		return joinPlayer;
 	}
-	
+
 	/**
 	 * 参加プレイヤー数を設定
-	 * 
+	 *
 	 * @param joinPlayer 参加プレイヤー数
 	 */
 	public void setJoinPlayer(Integer joinPlayer) {
 		this.joinPlayer = joinPlayer;
 	}
-	
+
 	/**
-	 * 更新日時を取得
-	 * 
-	 * @return 更新日時
+	 * ギャザリングGRNを取得
+	 *
+	 * @return ギャザリングGRN
 	 */
-	public Long getUpdateAt() {
-		return updateAt;
+	public String getGatheringId() {
+		return gatheringId;
 	}
-	
+
 	/**
-	 * 更新日時を設定
-	 * 
-	 * @param updateAt 更新日時
+	 * ギャザリングGRNを設定
+	 *
+	 * @param gatheringId ギャザリングGRN
 	 */
-	public void setUpdateAt(Long updateAt) {
-		this.updateAt = updateAt;
+	public void setGatheringId(String gatheringId) {
+		this.gatheringId = gatheringId;
 	}
+
 }

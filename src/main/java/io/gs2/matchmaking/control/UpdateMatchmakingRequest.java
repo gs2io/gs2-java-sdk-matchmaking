@@ -1,13 +1,28 @@
+/*
+ * Copyright 2016 Game Server Services, Inc. or its affiliates. All Rights
+ * Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+
 package io.gs2.matchmaking.control;
 
-import io.gs2.control.Gs2BasicRequest;
+import org.json.JSONObject;
+import java.util.List;
 import io.gs2.matchmaking.Gs2Matchmaking;
+import io.gs2.control.Gs2BasicRequest;
 
 /**
- * マッチメイキングの作成リクエスト。
- * 
  * @author Game Server Services, Inc.
- *
  */
 @SuppressWarnings("serial")
 public class UpdateMatchmakingRequest extends Gs2BasicRequest<UpdateMatchmakingRequest> {
@@ -16,41 +31,47 @@ public class UpdateMatchmakingRequest extends Gs2BasicRequest<UpdateMatchmakingR
 		public static final String FUNCTION = "UpdateMatchmaking";
 	}
 
-	/** マッチメイキング名 */
-	String matchmakingName;
-	/** 説明文 */
-	String description;
-	/** サービスクラス */
-	String serviceClass;
-	/** ギャザリングプール名 */
-	String gatheringPoolName;
-	/** GS2-InGamePushNotification ゲーム名 */
-	String notificationGameName;
-	/** コールバックURL */
-	String callback;
+	/** マッチメイキングの名前を指定します。 */
+	private String matchmakingName;
+
+	/** マッチメイキング完了コールバックURL */
+	private String callback;
+
+	/** マッチメイキングのサービスクラス */
+	private String serviceClass;
+
+	/** マッチメイキングの説明 */
+	private String description;
+
+	/** GS2-InGamePushNotification のゲーム名 */
+	private String notificationGameName;
+
+	/** GS2-Realtime のギャザリングプール名 */
+	private String gatheringPoolName;
+
 
 	/**
-	 * マッチメイキング名を取得。
-	 * 
-	 * @return マッチメイキング名
+	 * マッチメイキングの名前を指定します。を取得
+	 *
+	 * @return マッチメイキングの名前を指定します。
 	 */
 	public String getMatchmakingName() {
 		return matchmakingName;
 	}
-	
+
 	/**
-	 * マッチメイキング名を設定。
-	 * 
-	 * @param matchmakingName マッチメイキング名
+	 * マッチメイキングの名前を指定します。を設定
+	 *
+	 * @param matchmakingName マッチメイキングの名前を指定します。
 	 */
 	public void setMatchmakingName(String matchmakingName) {
 		this.matchmakingName = matchmakingName;
 	}
-	
+
 	/**
-	 * マッチメイキング名を設定。
-	 * 
-	 * @param matchmakingName マッチメイキング名
+	 * マッチメイキングの名前を指定します。を設定
+	 *
+	 * @param matchmakingName マッチメイキングの名前を指定します。
 	 * @return this
 	 */
 	public UpdateMatchmakingRequest withMatchmakingName(String matchmakingName) {
@@ -59,56 +80,56 @@ public class UpdateMatchmakingRequest extends Gs2BasicRequest<UpdateMatchmakingR
 	}
 
 	/**
-	 * 説明文を取得。
-	 * 
-	 * @return 説明文
+	 * マッチメイキング完了コールバックURLを取得
+	 *
+	 * @return マッチメイキング完了コールバックURL
 	 */
-	public String getDescription() {
-		return description;
+	public String getCallback() {
+		return callback;
 	}
-	
+
 	/**
-	 * 説明文を設定。
-	 * 
-	 * @param description 説明文
+	 * マッチメイキング完了コールバックURLを設定
+	 *
+	 * @param callback マッチメイキング完了コールバックURL
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCallback(String callback) {
+		this.callback = callback;
 	}
-	
+
 	/**
-	 * 説明文を設定。
-	 * 
-	 * @param description 説明文
+	 * マッチメイキング完了コールバックURLを設定
+	 *
+	 * @param callback マッチメイキング完了コールバックURL
 	 * @return this
 	 */
-	public UpdateMatchmakingRequest withDescription(String description) {
-		setDescription(description);
+	public UpdateMatchmakingRequest withCallback(String callback) {
+		setCallback(callback);
 		return this;
 	}
 
 	/**
-	 * サービスクラスを取得。
-	 * 
-	 * @return サービスクラス
+	 * マッチメイキングのサービスクラスを取得
+	 *
+	 * @return マッチメイキングのサービスクラス
 	 */
 	public String getServiceClass() {
 		return serviceClass;
 	}
-	
+
 	/**
-	 * サービスクラスを設定。
-	 * 
-	 * @param serviceClass サービスクラス
+	 * マッチメイキングのサービスクラスを設定
+	 *
+	 * @param serviceClass マッチメイキングのサービスクラス
 	 */
 	public void setServiceClass(String serviceClass) {
 		this.serviceClass = serviceClass;
 	}
-	
+
 	/**
-	 * サービスクラスを設定。
-	 * 
-	 * @param serviceClass サービスクラス
+	 * マッチメイキングのサービスクラスを設定
+	 *
+	 * @param serviceClass マッチメイキングのサービスクラス
 	 * @return this
 	 */
 	public UpdateMatchmakingRequest withServiceClass(String serviceClass) {
@@ -117,56 +138,56 @@ public class UpdateMatchmakingRequest extends Gs2BasicRequest<UpdateMatchmakingR
 	}
 
 	/**
-	 * ギャザリングプール名を取得。
-	 * 
-	 * @return ギャザリングプール名
+	 * マッチメイキングの説明を取得
+	 *
+	 * @return マッチメイキングの説明
 	 */
-	public String getGatheringPoolName() {
-		return gatheringPoolName;
+	public String getDescription() {
+		return description;
 	}
-	
+
 	/**
-	 * ギャザリングプール名を設定。
-	 * 
-	 * @param gatheringPoolName ギャザリングプール名
+	 * マッチメイキングの説明を設定
+	 *
+	 * @param description マッチメイキングの説明
 	 */
-	public void setGatheringPoolName(String gatheringPoolName) {
-		this.gatheringPoolName = gatheringPoolName;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	
+
 	/**
-	 * ギャザリングプール名を設定。
-	 * 
-	 * @param gatheringPoolName ギャザリングプール名
+	 * マッチメイキングの説明を設定
+	 *
+	 * @param description マッチメイキングの説明
 	 * @return this
 	 */
-	public UpdateMatchmakingRequest withGatheringPoolName(String gatheringPoolName) {
-		setGatheringPoolName(gatheringPoolName);
+	public UpdateMatchmakingRequest withDescription(String description) {
+		setDescription(description);
 		return this;
 	}
 
 	/**
-	 * GS2-InGamePushNotification ゲーム名を取得
+	 * GS2-InGamePushNotification のゲーム名を取得
 	 *
-	 * @return GS2-InGamePushNotification ゲーム名
+	 * @return GS2-InGamePushNotification のゲーム名
 	 */
 	public String getNotificationGameName() {
 		return notificationGameName;
 	}
 
 	/**
-	 * GS2-InGamePushNotification ゲーム名を設定
+	 * GS2-InGamePushNotification のゲーム名を設定
 	 *
-	 * @param notificationGameName GS2-InGamePushNotification ゲーム名
+	 * @param notificationGameName GS2-InGamePushNotification のゲーム名
 	 */
 	public void setNotificationGameName(String notificationGameName) {
 		this.notificationGameName = notificationGameName;
 	}
 
 	/**
-	 * GS2-InGamePushNotification ゲーム名を設定。
+	 * GS2-InGamePushNotification のゲーム名を設定
 	 *
-	 * @param notificationGameName GS2-InGamePushNotification ゲーム名
+	 * @param notificationGameName GS2-InGamePushNotification のゲーム名
 	 * @return this
 	 */
 	public UpdateMatchmakingRequest withNotificationGameName(String notificationGameName) {
@@ -175,32 +196,32 @@ public class UpdateMatchmakingRequest extends Gs2BasicRequest<UpdateMatchmakingR
 	}
 
 	/**
-	 * コールバックURLを取得。
-	 * 
-	 * @return コールバックURL
+	 * GS2-Realtime のギャザリングプール名を取得
+	 *
+	 * @return GS2-Realtime のギャザリングプール名
 	 */
-	public String getCallback() {
-		return callback;
+	public String getGatheringPoolName() {
+		return gatheringPoolName;
 	}
-	
+
 	/**
-	 * コールバックURLを設定。
-	 * 
-	 * @param callback コールバックURL
+	 * GS2-Realtime のギャザリングプール名を設定
+	 *
+	 * @param gatheringPoolName GS2-Realtime のギャザリングプール名
 	 */
-	public void setCallback(String callback) {
-		this.callback = callback;
+	public void setGatheringPoolName(String gatheringPoolName) {
+		this.gatheringPoolName = gatheringPoolName;
 	}
-	
+
 	/**
-	 * コールバックURLを設定。
-	 * 
-	 * @param callback コールバックURL
+	 * GS2-Realtime のギャザリングプール名を設定
+	 *
+	 * @param gatheringPoolName GS2-Realtime のギャザリングプール名
 	 * @return this
 	 */
-	public UpdateMatchmakingRequest withCallback(String callback) {
-		setCallback(callback);
+	public UpdateMatchmakingRequest withGatheringPoolName(String gatheringPoolName) {
+		setGatheringPoolName(gatheringPoolName);
 		return this;
 	}
-	
+
 }
