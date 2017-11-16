@@ -57,208 +57,6 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 
 
 	/**
-	 * パスコード付きギャザリングを新規作成します<br>
-	 * <br>
-	 * パスコードは8桁の数字で構成されたものが自動的に発行されます。<br>
-	 * パスコードの解像度的に秒間100を超える勢いでギャザリングを作成する必要がある場合は<br>
-	 * オートマッチメイキングと組み合わせる必要があります。<br>
-	 * <br>
-	 * - 消費クオータ: 10<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 * @return 結果
-	 */
-
-	public PasscodeCreateGatheringResult passcodeCreateGathering(PasscodeCreateGatheringRequest request) {
-
-		ObjectNode body = JsonNodeFactory.instance.objectNode();
-
-		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/passcode",
-				credential,
-				ENDPOINT,
-				PasscodeCreateGatheringRequest.Constant.MODULE,
-				PasscodeCreateGatheringRequest.Constant.FUNCTION,
-				body.toString());
-
-        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
-
-		return doRequest(post, PasscodeCreateGatheringResult.class);
-
-	}
-
-
-	/**
-	 * ギャザリングを解散します<br>
-	 * <br>
-	 * - 消費クオータ: 10<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 */
-
-	public void passcodeBreakupGathering(PasscodeBreakupGatheringRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/passcode/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "";
-
-
-
-		HttpDelete delete = createHttpDelete(
-				url,
-				credential,
-				ENDPOINT,
-				PasscodeBreakupGatheringRequest.Constant.MODULE,
-				PasscodeBreakupGatheringRequest.Constant.FUNCTION);
-
-        delete.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
-
-		doRequest(delete, null);
-
-	}
-
-
-	/**
-	 * マッチメイキングを更新します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 * @return 結果
-	 */
-
-	public UpdateMatchmakingResult updateMatchmaking(UpdateMatchmakingRequest request) {
-
-		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("callback", request.getCallback())
-				.put("serviceClass", request.getServiceClass());
-
-        if(request.getDescription() != null) body.put("description", request.getDescription());
-        if(request.getNotificationGameName() != null) body.put("notificationGameName", request.getNotificationGameName());
-        if(request.getGatheringPoolName() != null) body.put("gatheringPoolName", request.getGatheringPoolName());
-		HttpPut put = createHttpPut(
-				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "",
-				credential,
-				ENDPOINT,
-				UpdateMatchmakingRequest.Constant.MODULE,
-				UpdateMatchmakingRequest.Constant.FUNCTION,
-				body.toString());
-
-
-		return doRequest(put, UpdateMatchmakingResult.class);
-
-	}
-
-
-	/**
-	 * マッチメイキングを取得します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 * @return 結果
-	 */
-
-	public GetMatchmakingResult getMatchmaking(GetMatchmakingRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "";
-
-
-
-		HttpGet get = createHttpGet(
-				url,
-				credential,
-				ENDPOINT,
-				GetMatchmakingRequest.Constant.MODULE,
-				GetMatchmakingRequest.Constant.FUNCTION);
-
-
-		return doRequest(get, GetMatchmakingResult.class);
-
-	}
-
-
-	/**
-	 * マッチメイキングを削除します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 */
-
-	public void deleteMatchmaking(DeleteMatchmakingRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "";
-
-
-
-		HttpDelete delete = createHttpDelete(
-				url,
-				credential,
-				ENDPOINT,
-				DeleteMatchmakingRequest.Constant.MODULE,
-				DeleteMatchmakingRequest.Constant.FUNCTION);
-
-
-		doRequest(delete, null);
-
-	}
-
-
-	/**
-	 * パスコード付きギャザリングに参加します<br>
-	 * <br>
-	 * - 消費クオータ: 10<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 * @return 結果
-	 */
-
-	public PasscodeJoinGatheringResult passcodeJoinGathering(PasscodeJoinGatheringRequest request) {
-
-		ObjectNode body = JsonNodeFactory.instance.objectNode();
-
-		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/passcode/join/" + (request.getPasscode() == null ? "null" : request.getPasscode()) + "",
-				credential,
-				ENDPOINT,
-				PasscodeJoinGatheringRequest.Constant.MODULE,
-				PasscodeJoinGatheringRequest.Constant.FUNCTION,
-				body.toString());
-
-        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
-
-		return doRequest(post, PasscodeJoinGatheringResult.class);
-
-	}
-
-
-	/**
-	 * マッチメイキングのステータスを取得します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 * @return 結果
-	 */
-
-	public GetMatchmakingStatusResult getMatchmakingStatus(GetMatchmakingStatusRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/status";
-
-
-
-		HttpGet get = createHttpGet(
-				url,
-				credential,
-				ENDPOINT,
-				GetMatchmakingStatusRequest.Constant.MODULE,
-				GetMatchmakingStatusRequest.Constant.FUNCTION);
-
-
-		return doRequest(get, GetMatchmakingStatusResult.class);
-
-	}
-
-
-	/**
 	 * ギャザリングの参加者一覧を取得します<br>
 	 * <br>
 	 * マッチメイキングが成立すると 404 Not Found 応答が返るようになります。<br>
@@ -269,189 +67,9 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
+
 	 * @return 結果
-	 */
 
-	public PasscodeDescribeJoinedUserResult passcodeDescribeJoinedUser(PasscodeDescribeJoinedUserRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/passcode/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "/player";
-
-
-
-		HttpGet get = createHttpGet(
-				url,
-				credential,
-				ENDPOINT,
-				PasscodeDescribeJoinedUserRequest.Constant.MODULE,
-				PasscodeDescribeJoinedUserRequest.Constant.FUNCTION);
-
-        get.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
-
-		return doRequest(get, PasscodeDescribeJoinedUserResult.class);
-
-	}
-
-
-	/**
-	 * ギャザリングから離脱します<br>
-	 * <br>
-	 * 本APIは確実に成功することを保証していません。<br>
-	 * 例えば、離脱する直前にギャザリングが成立した場合は 404 Not Found を応答します。<br>
-	 * <br>
-	 * 404応答を受け取った場合はすでにギャザリングが成立していないかを確認する必要があります。<br>
-	 * <br>
-	 * - 消費クオータ: 10<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 */
-
-	public void passcodeLeaveGathering(PasscodeLeaveGatheringRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/passcode/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "/player";
-
-
-
-		HttpDelete delete = createHttpDelete(
-				url,
-				credential,
-				ENDPOINT,
-				PasscodeLeaveGatheringRequest.Constant.MODULE,
-				PasscodeLeaveGatheringRequest.Constant.FUNCTION);
-
-        delete.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
-
-		doRequest(delete, null);
-
-	}
-
-
-	/**
-	 * ギャザリングに参加します<br>
-	 * <br>
-	 * - 消費クオータ: 10<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 * @return 結果
-	 */
-
-	public RoomJoinGatheringResult roomJoinGathering(RoomJoinGatheringRequest request) {
-
-		ObjectNode body = JsonNodeFactory.instance.objectNode();
-
-		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/room/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "",
-				credential,
-				ENDPOINT,
-				RoomJoinGatheringRequest.Constant.MODULE,
-				RoomJoinGatheringRequest.Constant.FUNCTION,
-				body.toString());
-
-        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
-
-		return doRequest(post, RoomJoinGatheringResult.class);
-
-	}
-
-
-	/**
-	 * ギャザリングを解散します<br>
-	 * <br>
-	 * - 消費クオータ: 10<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 */
-
-	public void roomBreakupGathering(RoomBreakupGatheringRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/room/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "";
-
-
-
-		HttpDelete delete = createHttpDelete(
-				url,
-				credential,
-				ENDPOINT,
-				RoomBreakupGatheringRequest.Constant.MODULE,
-				RoomBreakupGatheringRequest.Constant.FUNCTION);
-
-        delete.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
-
-		doRequest(delete, null);
-
-	}
-
-
-	/**
-	 * マッチメイキングを早期終了します<br>
-	 * <br>
-	 * - 消費クオータ: 10<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 * @return 結果
-	 */
-
-	public void passcodeEarlyCompleteGathering(PasscodeEarlyCompleteGatheringRequest request) {
-
-		ObjectNode body = JsonNodeFactory.instance.objectNode();
-
-		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/passcode/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "/complete",
-				credential,
-				ENDPOINT,
-				PasscodeEarlyCompleteGatheringRequest.Constant.MODULE,
-				PasscodeEarlyCompleteGatheringRequest.Constant.FUNCTION,
-				body.toString());
-
-        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
-
-		doRequest(post, null);
-
-	}
-
-
-	/**
-	 * サービスクラスの一覧を取得します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 * @return 結果
-	 */
-
-	public DescribeServiceClassResult describeServiceClass(DescribeServiceClassRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/serviceClass";
-
-
-
-		HttpGet get = createHttpGet(
-				url,
-				credential,
-				ENDPOINT,
-				DescribeServiceClassRequest.Constant.MODULE,
-				DescribeServiceClassRequest.Constant.FUNCTION);
-
-
-		return doRequest(get, DescribeServiceClassResult.class);
-
-	}
-
-
-	/**
-	 * ギャザリングの参加者一覧を取得します<br>
-	 * <br>
-	 * マッチメイキングが成立すると 404 Not Found 応答が返るようになります。<br>
-	 * 404応答を返すようになる直前にコールバックエンドポイントに確定した参加者一覧情報が渡されるため、<br>
-	 * コールバックを受け取ってからは本APIを呼び出さないように実装するべきです。<br>
-	 * <br>
-	 * - 消費クオータ: 3<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 * @return 結果
 	 */
 
 	public AnybodyDescribeJoinedUserResult anybodyDescribeJoinedUser(AnybodyDescribeJoinedUserRequest request) {
@@ -475,6 +93,44 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 
 
 	/**
+	 * Anybodyマッチメイキングを開始します<br>
+	 * <br>
+	 * すでに存在するギャザリングに参加するか、新しいギャザリングを新規作成します。<br>
+	 * 戻り値で参加したギャザリングIDが返りますので、そのIDを利用して後続のAPIを利用できます。<br>
+	 * <br>
+	 * ギャザリングが成立した場合、マッチメイキングに設定したコールバックエンドポイントにギャザリング<br>
+	 * とそのギャザリングの参加者一覧が返されます。<br>
+	 * コールバック後にギャザリング情報はマッチメイキングサーバから削除され、後続のAPIも利用できなくなります。<br>
+	 * <br>
+	 * - 消費クオータ: 10<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public AnybodyDoMatchmakingResult anybodyDoMatchmaking(AnybodyDoMatchmakingRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode();
+
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/anybody",
+				credential,
+				ENDPOINT,
+				AnybodyDoMatchmakingRequest.Constant.MODULE,
+				AnybodyDoMatchmakingRequest.Constant.FUNCTION,
+				body.toString());
+
+        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		return doRequest(post, AnybodyDoMatchmakingResult.class);
+
+	}
+
+
+	/**
 	 * ギャザリングから離脱します<br>
 	 * <br>
 	 * 本APIは確実に成功することを保証していません。<br>
@@ -486,6 +142,7 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
+
 	 */
 
 	public void anybodyLeaveGathering(AnybodyLeaveGatheringRequest request) {
@@ -509,6 +166,50 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 
 
 	/**
+	 * マッチメイキングを新規作成します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public CreateMatchmakingResult createMatchmaking(CreateMatchmakingRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("serviceClass", request.getServiceClass())
+				.put("name", request.getName())
+				.put("callback", request.getCallback())
+				.put("maxPlayer", request.getMaxPlayer())
+				.put("type", request.getType());
+
+        if(request.getDescription() != null) body.put("description", request.getDescription());
+        if(request.getLeaveGatheringDoneTriggerScript() != null) body.put("leaveGatheringDoneTriggerScript", request.getLeaveGatheringDoneTriggerScript());
+        if(request.getJoinGatheringDoneTriggerScript() != null) body.put("joinGatheringDoneTriggerScript", request.getJoinGatheringDoneTriggerScript());
+        if(request.getCreateGatheringTriggerScript() != null) body.put("createGatheringTriggerScript", request.getCreateGatheringTriggerScript());
+        if(request.getLeaveGatheringTriggerScript() != null) body.put("leaveGatheringTriggerScript", request.getLeaveGatheringTriggerScript());
+        if(request.getMatchmakingCompleteTriggerScript() != null) body.put("matchmakingCompleteTriggerScript", request.getMatchmakingCompleteTriggerScript());
+        if(request.getJoinGatheringTriggerScript() != null) body.put("joinGatheringTriggerScript", request.getJoinGatheringTriggerScript());
+        if(request.getGatheringPoolName() != null) body.put("gatheringPoolName", request.getGatheringPoolName());
+        if(request.getCreateGatheringDoneTriggerScript() != null) body.put("createGatheringDoneTriggerScript", request.getCreateGatheringDoneTriggerScript());
+        if(request.getNotificationGameName() != null) body.put("notificationGameName", request.getNotificationGameName());
+        if(request.getBreakupGatheringTriggerScript() != null) body.put("breakupGatheringTriggerScript", request.getBreakupGatheringTriggerScript());
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/matchmaking",
+				credential,
+				ENDPOINT,
+				CreateMatchmakingRequest.Constant.MODULE,
+				CreateMatchmakingRequest.Constant.FUNCTION,
+				body.toString());
+
+
+		return doRequest(post, CreateMatchmakingResult.class);
+
+	}
+
+
+	/**
 	 * ギャザリングの参加者一覧を取得します<br>
 	 * <br>
 	 * マッチメイキングが成立すると 404 Not Found 応答が返るようになります。<br>
@@ -519,7 +220,9 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
+
 	 * @return 結果
+
 	 */
 
 	public CustomAutoDescribeJoinedUserResult customAutoDescribeJoinedUser(CustomAutoDescribeJoinedUserRequest request) {
@@ -543,241 +246,6 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 
 
 	/**
-	 * ギャザリングから離脱します<br>
-	 * <br>
-	 * 本APIは確実に成功することを保証していません。<br>
-	 * 例えば、離脱する直前にギャザリングが成立した場合は 404 Not Found を応答します。<br>
-	 * <br>
-	 * 404応答を受け取った場合はすでにギャザリングが成立していないかを確認する必要があります。<br>
-	 * <br>
-	 * - 消費クオータ: 10<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 */
-
-	public void customAutoLeaveGathering(CustomAutoLeaveGatheringRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/customauto/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "/player";
-
-
-
-		HttpDelete delete = createHttpDelete(
-				url,
-				credential,
-				ENDPOINT,
-				CustomAutoLeaveGatheringRequest.Constant.MODULE,
-				CustomAutoLeaveGatheringRequest.Constant.FUNCTION);
-
-        delete.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
-
-		doRequest(delete, null);
-
-	}
-
-
-	/**
-	 * ギャザリングを新規作成します<br>
-	 * <br>
-	 * - 消費クオータ: 10<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 * @return 結果
-	 */
-
-	public RoomCreateGatheringResult roomCreateGathering(RoomCreateGatheringRequest request) {
-
-		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("meta", request.getMeta());
-
-		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/room",
-				credential,
-				ENDPOINT,
-				RoomCreateGatheringRequest.Constant.MODULE,
-				RoomCreateGatheringRequest.Constant.FUNCTION,
-				body.toString());
-
-        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
-
-		return doRequest(post, RoomCreateGatheringResult.class);
-
-	}
-
-
-	/**
-	 * ギャザリング一覧を取得します<br>
-	 * <br>
-	 * - 消費クオータ: 20件あたり3クオータ<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 * @return 結果
-	 */
-
-	public RoomDescribeGatheringResult roomDescribeGathering(RoomDescribeGatheringRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/room";
-
-        List<NameValuePair> queryString = new ArrayList<>();
-        if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", String.valueOf(request.getPageToken())));
-        if(request.getLimit() != null) queryString.add(new BasicNameValuePair("limit", String.valueOf(request.getLimit())));
-
-
-		if(queryString.size() > 0) {
-			url += "?" + URLEncodedUtils.format(queryString, "UTF-8");
-		}
-		HttpGet get = createHttpGet(
-				url,
-				credential,
-				ENDPOINT,
-				RoomDescribeGatheringRequest.Constant.MODULE,
-				RoomDescribeGatheringRequest.Constant.FUNCTION);
-
-        get.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
-
-		return doRequest(get, RoomDescribeGatheringResult.class);
-
-	}
-
-
-	/**
-	 * マッチメイキングを新規作成します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 * @return 結果
-	 */
-
-	public CreateMatchmakingResult createMatchmaking(CreateMatchmakingRequest request) {
-
-		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("name", request.getName())
-				.put("serviceClass", request.getServiceClass())
-				.put("callback", request.getCallback())
-				.put("maxPlayer", request.getMaxPlayer())
-				.put("type", request.getType());
-
-        if(request.getGatheringPoolName() != null) body.put("gatheringPoolName", request.getGatheringPoolName());
-        if(request.getNotificationGameName() != null) body.put("notificationGameName", request.getNotificationGameName());
-        if(request.getDescription() != null) body.put("description", request.getDescription());
-		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/matchmaking",
-				credential,
-				ENDPOINT,
-				CreateMatchmakingRequest.Constant.MODULE,
-				CreateMatchmakingRequest.Constant.FUNCTION,
-				body.toString());
-
-
-		return doRequest(post, CreateMatchmakingResult.class);
-
-	}
-
-
-	/**
-	 * マッチメイキングの一覧を取得します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 * @return 結果
-	 */
-
-	public DescribeMatchmakingResult describeMatchmaking(DescribeMatchmakingRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking";
-
-        List<NameValuePair> queryString = new ArrayList<>();
-        if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", String.valueOf(request.getPageToken())));
-        if(request.getLimit() != null) queryString.add(new BasicNameValuePair("limit", String.valueOf(request.getLimit())));
-
-
-		if(queryString.size() > 0) {
-			url += "?" + URLEncodedUtils.format(queryString, "UTF-8");
-		}
-		HttpGet get = createHttpGet(
-				url,
-				credential,
-				ENDPOINT,
-				DescribeMatchmakingRequest.Constant.MODULE,
-				DescribeMatchmakingRequest.Constant.FUNCTION);
-
-
-		return doRequest(get, DescribeMatchmakingResult.class);
-
-	}
-
-
-	/**
-	 * ギャザリングの参加者一覧を取得します<br>
-	 * <br>
-	 * マッチメイキングが成立すると 404 Not Found 応答が返るようになります。<br>
-	 * 404応答を返すようになる直前にコールバックエンドポイントに確定した参加者一覧情報が渡されるため、<br>
-	 * コールバックを受け取ってからは本APIを呼び出さないように実装するべきです。<br>
-	 * <br>
-	 * - 消費クオータ: 3<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 * @return 結果
-	 */
-
-	public RoomDescribeJoinedUserResult roomDescribeJoinedUser(RoomDescribeJoinedUserRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/room/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "/player";
-
-
-
-		HttpGet get = createHttpGet(
-				url,
-				credential,
-				ENDPOINT,
-				RoomDescribeJoinedUserRequest.Constant.MODULE,
-				RoomDescribeJoinedUserRequest.Constant.FUNCTION);
-
-        get.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
-
-		return doRequest(get, RoomDescribeJoinedUserResult.class);
-
-	}
-
-
-	/**
-	 * ギャザリングから離脱します<br>
-	 * <br>
-	 * 本APIは確実に成功することを保証していません。<br>
-	 * 例えば、離脱する直前にギャザリングが成立した場合は 404 Not Found を応答します。<br>
-	 * <br>
-	 * 404応答を受け取った場合はすでにギャザリングが成立していないかを確認する必要があります。<br>
-	 * <br>
-	 * - 消費クオータ: 10<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-	 */
-
-	public void roomLeaveGathering(RoomLeaveGatheringRequest request) {
-
-	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/room/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "/player";
-
-
-
-		HttpDelete delete = createHttpDelete(
-				url,
-				credential,
-				ENDPOINT,
-				RoomLeaveGatheringRequest.Constant.MODULE,
-				RoomLeaveGatheringRequest.Constant.FUNCTION);
-
-        delete.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
-
-		doRequest(delete, null);
-
-	}
-
-
-	/**
 	 * カスタムオートマッチメイキングを開始します<br>
 	 * <br>
 	 * カスタムオートマッチメイキングは最大5つの属性値を指定してギャザリングを作成するか、<br>
@@ -796,7 +264,9 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
+
 	 * @return 結果
+
 	 */
 
 	public CustomAutoDoMatchmakingResult customAutoDoMatchmaking(CustomAutoDoMatchmakingRequest request) {
@@ -835,37 +305,517 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 
 
 	/**
-	 * Anybodyマッチメイキングを開始します<br>
+	 * ギャザリングから離脱します<br>
 	 * <br>
-	 * すでに存在するギャザリングに参加するか、新しいギャザリングを新規作成します。<br>
-	 * 戻り値で参加したギャザリングIDが返りますので、そのIDを利用して後続のAPIを利用できます。<br>
+	 * 本APIは確実に成功することを保証していません。<br>
+	 * 例えば、離脱する直前にギャザリングが成立した場合は 404 Not Found を応答します。<br>
 	 * <br>
-	 * ギャザリングが成立した場合、マッチメイキングに設定したコールバックエンドポイントにギャザリング<br>
-	 * とそのギャザリングの参加者一覧が返されます。<br>
-	 * コールバック後にギャザリング情報はマッチメイキングサーバから削除され、後続のAPIも利用できなくなります。<br>
+	 * 404応答を受け取った場合はすでにギャザリングが成立していないかを確認する必要があります。<br>
 	 * <br>
 	 * - 消費クオータ: 10<br>
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
-	 * @return 結果
+
 	 */
 
-	public AnybodyDoMatchmakingResult anybodyDoMatchmaking(AnybodyDoMatchmakingRequest request) {
+	public void customAutoLeaveGathering(CustomAutoLeaveGatheringRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/customauto/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "/player";
+
+
+
+		HttpDelete delete = createHttpDelete(
+				url,
+				credential,
+				ENDPOINT,
+				CustomAutoLeaveGatheringRequest.Constant.MODULE,
+				CustomAutoLeaveGatheringRequest.Constant.FUNCTION);
+
+        delete.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		doRequest(delete, null);
+
+	}
+
+
+	/**
+	 * マッチメイキングを削除します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 */
+
+	public void deleteMatchmaking(DeleteMatchmakingRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "";
+
+
+
+		HttpDelete delete = createHttpDelete(
+				url,
+				credential,
+				ENDPOINT,
+				DeleteMatchmakingRequest.Constant.MODULE,
+				DeleteMatchmakingRequest.Constant.FUNCTION);
+
+
+		doRequest(delete, null);
+
+	}
+
+
+	/**
+	 * マッチメイキングの一覧を取得します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public DescribeMatchmakingResult describeMatchmaking(DescribeMatchmakingRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking";
+
+        List<NameValuePair> queryString = new ArrayList<>();
+        if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", String.valueOf(request.getPageToken())));
+        if(request.getLimit() != null) queryString.add(new BasicNameValuePair("limit", String.valueOf(request.getLimit())));
+
+
+		if(queryString.size() > 0) {
+			url += "?" + URLEncodedUtils.format(queryString, "UTF-8");
+		}
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				DescribeMatchmakingRequest.Constant.MODULE,
+				DescribeMatchmakingRequest.Constant.FUNCTION);
+
+
+		return doRequest(get, DescribeMatchmakingResult.class);
+
+	}
+
+
+	/**
+	 * サービスクラスの一覧を取得します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public DescribeServiceClassResult describeServiceClass(DescribeServiceClassRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/serviceClass";
+
+
+
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				DescribeServiceClassRequest.Constant.MODULE,
+				DescribeServiceClassRequest.Constant.FUNCTION);
+
+
+		return doRequest(get, DescribeServiceClassResult.class);
+
+	}
+
+
+	/**
+	 * マッチメイキングを取得します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public GetMatchmakingResult getMatchmaking(GetMatchmakingRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "";
+
+
+
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				GetMatchmakingRequest.Constant.MODULE,
+				GetMatchmakingRequest.Constant.FUNCTION);
+
+
+		return doRequest(get, GetMatchmakingResult.class);
+
+	}
+
+
+	/**
+	 * マッチメイキングのステータスを取得します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public GetMatchmakingStatusResult getMatchmakingStatus(GetMatchmakingStatusRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/status";
+
+
+
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				GetMatchmakingStatusRequest.Constant.MODULE,
+				GetMatchmakingStatusRequest.Constant.FUNCTION);
+
+
+		return doRequest(get, GetMatchmakingStatusResult.class);
+
+	}
+
+
+	/**
+	 * ギャザリングを解散します<br>
+	 * <br>
+	 * - 消費クオータ: 10<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 */
+
+	public void passcodeBreakupGathering(PasscodeBreakupGatheringRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/passcode/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "";
+
+
+
+		HttpDelete delete = createHttpDelete(
+				url,
+				credential,
+				ENDPOINT,
+				PasscodeBreakupGatheringRequest.Constant.MODULE,
+				PasscodeBreakupGatheringRequest.Constant.FUNCTION);
+
+        delete.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		doRequest(delete, null);
+
+	}
+
+
+	/**
+	 * パスコード付きギャザリングを新規作成します<br>
+	 * <br>
+	 * パスコードは8桁の数字で構成されたものが自動的に発行されます。<br>
+	 * パスコードの解像度的に秒間100を超える勢いでギャザリングを作成する必要がある場合は<br>
+	 * オートマッチメイキングと組み合わせる必要があります。<br>
+	 * <br>
+	 * - 消費クオータ: 10<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public PasscodeCreateGatheringResult passcodeCreateGathering(PasscodeCreateGatheringRequest request) {
 
 		ObjectNode body = JsonNodeFactory.instance.objectNode();
 
 		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/anybody",
+				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/passcode",
 				credential,
 				ENDPOINT,
-				AnybodyDoMatchmakingRequest.Constant.MODULE,
-				AnybodyDoMatchmakingRequest.Constant.FUNCTION,
+				PasscodeCreateGatheringRequest.Constant.MODULE,
+				PasscodeCreateGatheringRequest.Constant.FUNCTION,
 				body.toString());
 
         post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 
-		return doRequest(post, AnybodyDoMatchmakingResult.class);
+		return doRequest(post, PasscodeCreateGatheringResult.class);
+
+	}
+
+
+	/**
+	 * ギャザリングの参加者一覧を取得します<br>
+	 * <br>
+	 * マッチメイキングが成立すると 404 Not Found 応答が返るようになります。<br>
+	 * 404応答を返すようになる直前にコールバックエンドポイントに確定した参加者一覧情報が渡されるため、<br>
+	 * コールバックを受け取ってからは本APIを呼び出さないように実装するべきです。<br>
+	 * <br>
+	 * - 消費クオータ: 3<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public PasscodeDescribeJoinedUserResult passcodeDescribeJoinedUser(PasscodeDescribeJoinedUserRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/passcode/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "/player";
+
+
+
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				PasscodeDescribeJoinedUserRequest.Constant.MODULE,
+				PasscodeDescribeJoinedUserRequest.Constant.FUNCTION);
+
+        get.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		return doRequest(get, PasscodeDescribeJoinedUserResult.class);
+
+	}
+
+
+	/**
+	 * マッチメイキングを早期終了します<br>
+	 * <br>
+	 * - 消費クオータ: 10<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 */
+
+	public void passcodeEarlyCompleteGathering(PasscodeEarlyCompleteGatheringRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode();
+
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/passcode/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "/complete",
+				credential,
+				ENDPOINT,
+				PasscodeEarlyCompleteGatheringRequest.Constant.MODULE,
+				PasscodeEarlyCompleteGatheringRequest.Constant.FUNCTION,
+				body.toString());
+
+        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		doRequest(post, null);
+
+	}
+
+
+	/**
+	 * パスコード付きギャザリングに参加します<br>
+	 * <br>
+	 * - 消費クオータ: 10<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public PasscodeJoinGatheringResult passcodeJoinGathering(PasscodeJoinGatheringRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode();
+
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/passcode/join/" + (request.getPasscode() == null ? "null" : request.getPasscode()) + "",
+				credential,
+				ENDPOINT,
+				PasscodeJoinGatheringRequest.Constant.MODULE,
+				PasscodeJoinGatheringRequest.Constant.FUNCTION,
+				body.toString());
+
+        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		return doRequest(post, PasscodeJoinGatheringResult.class);
+
+	}
+
+
+	/**
+	 * ギャザリングから離脱します<br>
+	 * <br>
+	 * 本APIは確実に成功することを保証していません。<br>
+	 * 例えば、離脱する直前にギャザリングが成立した場合は 404 Not Found を応答します。<br>
+	 * <br>
+	 * 404応答を受け取った場合はすでにギャザリングが成立していないかを確認する必要があります。<br>
+	 * <br>
+	 * - 消費クオータ: 10<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 */
+
+	public void passcodeLeaveGathering(PasscodeLeaveGatheringRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/passcode/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "/player";
+
+
+
+		HttpDelete delete = createHttpDelete(
+				url,
+				credential,
+				ENDPOINT,
+				PasscodeLeaveGatheringRequest.Constant.MODULE,
+				PasscodeLeaveGatheringRequest.Constant.FUNCTION);
+
+        delete.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		doRequest(delete, null);
+
+	}
+
+
+	/**
+	 * ギャザリングを解散します<br>
+	 * <br>
+	 * - 消費クオータ: 10<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 */
+
+	public void roomBreakupGathering(RoomBreakupGatheringRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/room/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "";
+
+
+
+		HttpDelete delete = createHttpDelete(
+				url,
+				credential,
+				ENDPOINT,
+				RoomBreakupGatheringRequest.Constant.MODULE,
+				RoomBreakupGatheringRequest.Constant.FUNCTION);
+
+        delete.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		doRequest(delete, null);
+
+	}
+
+
+	/**
+	 * ギャザリングを新規作成します<br>
+	 * <br>
+	 * - 消費クオータ: 10<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public RoomCreateGatheringResult roomCreateGathering(RoomCreateGatheringRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("meta", request.getMeta());
+
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/room",
+				credential,
+				ENDPOINT,
+				RoomCreateGatheringRequest.Constant.MODULE,
+				RoomCreateGatheringRequest.Constant.FUNCTION,
+				body.toString());
+
+        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		return doRequest(post, RoomCreateGatheringResult.class);
+
+	}
+
+
+	/**
+	 * ギャザリング一覧を取得します<br>
+	 * <br>
+	 * - 消費クオータ: 20件あたり3クオータ<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public RoomDescribeGatheringResult roomDescribeGathering(RoomDescribeGatheringRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/room";
+
+        List<NameValuePair> queryString = new ArrayList<>();
+        if(request.getPageToken() != null) queryString.add(new BasicNameValuePair("pageToken", String.valueOf(request.getPageToken())));
+        if(request.getLimit() != null) queryString.add(new BasicNameValuePair("limit", String.valueOf(request.getLimit())));
+
+
+		if(queryString.size() > 0) {
+			url += "?" + URLEncodedUtils.format(queryString, "UTF-8");
+		}
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				RoomDescribeGatheringRequest.Constant.MODULE,
+				RoomDescribeGatheringRequest.Constant.FUNCTION);
+
+        get.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		return doRequest(get, RoomDescribeGatheringResult.class);
+
+	}
+
+
+	/**
+	 * ギャザリングの参加者一覧を取得します<br>
+	 * <br>
+	 * マッチメイキングが成立すると 404 Not Found 応答が返るようになります。<br>
+	 * 404応答を返すようになる直前にコールバックエンドポイントに確定した参加者一覧情報が渡されるため、<br>
+	 * コールバックを受け取ってからは本APIを呼び出さないように実装するべきです。<br>
+	 * <br>
+	 * - 消費クオータ: 3<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public RoomDescribeJoinedUserResult roomDescribeJoinedUser(RoomDescribeJoinedUserRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/room/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "/player";
+
+
+
+		HttpGet get = createHttpGet(
+				url,
+				credential,
+				ENDPOINT,
+				RoomDescribeJoinedUserRequest.Constant.MODULE,
+				RoomDescribeJoinedUserRequest.Constant.FUNCTION);
+
+        get.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		return doRequest(get, RoomDescribeJoinedUserResult.class);
 
 	}
 
@@ -877,7 +827,7 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 	 * <br>
 	 *
 	 * @param request リクエストパラメータ
-	 * @return 結果
+
 	 */
 
 	public void roomEarlyCompleteGathering(RoomEarlyCompleteGatheringRequest request) {
@@ -895,6 +845,113 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
         post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 
 		doRequest(post, null);
+
+	}
+
+
+	/**
+	 * ギャザリングに参加します<br>
+	 * <br>
+	 * - 消費クオータ: 10<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public RoomJoinGatheringResult roomJoinGathering(RoomJoinGatheringRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode();
+
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/room/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "",
+				credential,
+				ENDPOINT,
+				RoomJoinGatheringRequest.Constant.MODULE,
+				RoomJoinGatheringRequest.Constant.FUNCTION,
+				body.toString());
+
+        post.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		return doRequest(post, RoomJoinGatheringResult.class);
+
+	}
+
+
+	/**
+	 * ギャザリングから離脱します<br>
+	 * <br>
+	 * 本APIは確実に成功することを保証していません。<br>
+	 * 例えば、離脱する直前にギャザリングが成立した場合は 404 Not Found を応答します。<br>
+	 * <br>
+	 * 404応答を受け取った場合はすでにギャザリングが成立していないかを確認する必要があります。<br>
+	 * <br>
+	 * - 消費クオータ: 10<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 */
+
+	public void roomLeaveGathering(RoomLeaveGatheringRequest request) {
+
+	    String url = Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "/room/" + (request.getGatheringId() == null ? "null" : request.getGatheringId()) + "/player";
+
+
+
+		HttpDelete delete = createHttpDelete(
+				url,
+				credential,
+				ENDPOINT,
+				RoomLeaveGatheringRequest.Constant.MODULE,
+				RoomLeaveGatheringRequest.Constant.FUNCTION);
+
+        delete.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
+
+		doRequest(delete, null);
+
+	}
+
+
+	/**
+	 * マッチメイキングを更新します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public UpdateMatchmakingResult updateMatchmaking(UpdateMatchmakingRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("serviceClass", request.getServiceClass())
+				.put("callback", request.getCallback());
+
+        if(request.getCreateGatheringTriggerScript() != null) body.put("createGatheringTriggerScript", request.getCreateGatheringTriggerScript());
+        if(request.getLeaveGatheringTriggerScript() != null) body.put("leaveGatheringTriggerScript", request.getLeaveGatheringTriggerScript());
+        if(request.getDescription() != null) body.put("description", request.getDescription());
+        if(request.getLeaveGatheringDoneTriggerScript() != null) body.put("leaveGatheringDoneTriggerScript", request.getLeaveGatheringDoneTriggerScript());
+        if(request.getMatchmakingCompleteTriggerScript() != null) body.put("matchmakingCompleteTriggerScript", request.getMatchmakingCompleteTriggerScript());
+        if(request.getJoinGatheringTriggerScript() != null) body.put("joinGatheringTriggerScript", request.getJoinGatheringTriggerScript());
+        if(request.getGatheringPoolName() != null) body.put("gatheringPoolName", request.getGatheringPoolName());
+        if(request.getCreateGatheringDoneTriggerScript() != null) body.put("createGatheringDoneTriggerScript", request.getCreateGatheringDoneTriggerScript());
+        if(request.getNotificationGameName() != null) body.put("notificationGameName", request.getNotificationGameName());
+        if(request.getJoinGatheringDoneTriggerScript() != null) body.put("joinGatheringDoneTriggerScript", request.getJoinGatheringDoneTriggerScript());
+        if(request.getBreakupGatheringTriggerScript() != null) body.put("breakupGatheringTriggerScript", request.getBreakupGatheringTriggerScript());
+		HttpPut put = createHttpPut(
+				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null ? "null" : request.getMatchmakingName()) + "",
+				credential,
+				ENDPOINT,
+				UpdateMatchmakingRequest.Constant.MODULE,
+				UpdateMatchmakingRequest.Constant.FUNCTION,
+				body.toString());
+
+
+		return doRequest(put, UpdateMatchmakingResult.class);
 
 	}
 

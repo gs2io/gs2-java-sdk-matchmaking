@@ -34,20 +34,44 @@ public class UpdateMatchmakingRequest extends Gs2BasicRequest<UpdateMatchmakingR
 	/** マッチメイキングの名前を指定します。 */
 	private String matchmakingName;
 
-	/** マッチメイキング完了コールバックURL */
-	private String callback;
+	/** ギャザリング作成時 に実行されるGS2-Script */
+	private String createGatheringTriggerScript;
 
-	/** マッチメイキングのサービスクラス */
-	private String serviceClass;
+	/** ギャザリング離脱時 に実行されるGS2-Script */
+	private String leaveGatheringTriggerScript;
 
 	/** マッチメイキングの説明 */
 	private String description;
 
-	/** GS2-InGamePushNotification のゲーム名 */
-	private String notificationGameName;
+	/** ギャザリング離脱完了時 に実行されるGS2-Script */
+	private String leaveGatheringDoneTriggerScript;
+
+	/** マッチメイキング成立時 に実行されるGS2-Script */
+	private String matchmakingCompleteTriggerScript;
+
+	/** ギャザリング参加時 に実行されるGS2-Script */
+	private String joinGatheringTriggerScript;
+
+	/** マッチメイキングのサービスクラス */
+	private String serviceClass;
 
 	/** GS2-Realtime のギャザリングプール名 */
 	private String gatheringPoolName;
+
+	/** ギャザリング作成完了時 に実行されるGS2-Script */
+	private String createGatheringDoneTriggerScript;
+
+	/** マッチメイキング完了コールバックURL */
+	private String callback;
+
+	/** GS2-InGamePushNotification のゲーム名 */
+	private String notificationGameName;
+
+	/** ギャザリング参加完了時 に実行されるGS2-Script */
+	private String joinGatheringDoneTriggerScript;
+
+	/** ギャザリング解散時 に実行されるGS2-Script */
+	private String breakupGatheringTriggerScript;
 
 
 	/**
@@ -80,60 +104,60 @@ public class UpdateMatchmakingRequest extends Gs2BasicRequest<UpdateMatchmakingR
 	}
 
 	/**
-	 * マッチメイキング完了コールバックURLを取得
+	 * ギャザリング作成時 に実行されるGS2-Scriptを取得
 	 *
-	 * @return マッチメイキング完了コールバックURL
+	 * @return ギャザリング作成時 に実行されるGS2-Script
 	 */
-	public String getCallback() {
-		return callback;
+	public String getCreateGatheringTriggerScript() {
+		return createGatheringTriggerScript;
 	}
 
 	/**
-	 * マッチメイキング完了コールバックURLを設定
+	 * ギャザリング作成時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param callback マッチメイキング完了コールバックURL
+	 * @param createGatheringTriggerScript ギャザリング作成時 に実行されるGS2-Script
 	 */
-	public void setCallback(String callback) {
-		this.callback = callback;
+	public void setCreateGatheringTriggerScript(String createGatheringTriggerScript) {
+		this.createGatheringTriggerScript = createGatheringTriggerScript;
 	}
 
 	/**
-	 * マッチメイキング完了コールバックURLを設定
+	 * ギャザリング作成時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param callback マッチメイキング完了コールバックURL
+	 * @param createGatheringTriggerScript ギャザリング作成時 に実行されるGS2-Script
 	 * @return this
 	 */
-	public UpdateMatchmakingRequest withCallback(String callback) {
-		setCallback(callback);
+	public UpdateMatchmakingRequest withCreateGatheringTriggerScript(String createGatheringTriggerScript) {
+		setCreateGatheringTriggerScript(createGatheringTriggerScript);
 		return this;
 	}
 
 	/**
-	 * マッチメイキングのサービスクラスを取得
+	 * ギャザリング離脱時 に実行されるGS2-Scriptを取得
 	 *
-	 * @return マッチメイキングのサービスクラス
+	 * @return ギャザリング離脱時 に実行されるGS2-Script
 	 */
-	public String getServiceClass() {
-		return serviceClass;
+	public String getLeaveGatheringTriggerScript() {
+		return leaveGatheringTriggerScript;
 	}
 
 	/**
-	 * マッチメイキングのサービスクラスを設定
+	 * ギャザリング離脱時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param serviceClass マッチメイキングのサービスクラス
+	 * @param leaveGatheringTriggerScript ギャザリング離脱時 に実行されるGS2-Script
 	 */
-	public void setServiceClass(String serviceClass) {
-		this.serviceClass = serviceClass;
+	public void setLeaveGatheringTriggerScript(String leaveGatheringTriggerScript) {
+		this.leaveGatheringTriggerScript = leaveGatheringTriggerScript;
 	}
 
 	/**
-	 * マッチメイキングのサービスクラスを設定
+	 * ギャザリング離脱時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param serviceClass マッチメイキングのサービスクラス
+	 * @param leaveGatheringTriggerScript ギャザリング離脱時 に実行されるGS2-Script
 	 * @return this
 	 */
-	public UpdateMatchmakingRequest withServiceClass(String serviceClass) {
-		setServiceClass(serviceClass);
+	public UpdateMatchmakingRequest withLeaveGatheringTriggerScript(String leaveGatheringTriggerScript) {
+		setLeaveGatheringTriggerScript(leaveGatheringTriggerScript);
 		return this;
 	}
 
@@ -167,31 +191,118 @@ public class UpdateMatchmakingRequest extends Gs2BasicRequest<UpdateMatchmakingR
 	}
 
 	/**
-	 * GS2-InGamePushNotification のゲーム名を取得
+	 * ギャザリング離脱完了時 に実行されるGS2-Scriptを取得
 	 *
-	 * @return GS2-InGamePushNotification のゲーム名
+	 * @return ギャザリング離脱完了時 に実行されるGS2-Script
 	 */
-	public String getNotificationGameName() {
-		return notificationGameName;
+	public String getLeaveGatheringDoneTriggerScript() {
+		return leaveGatheringDoneTriggerScript;
 	}
 
 	/**
-	 * GS2-InGamePushNotification のゲーム名を設定
+	 * ギャザリング離脱完了時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param notificationGameName GS2-InGamePushNotification のゲーム名
+	 * @param leaveGatheringDoneTriggerScript ギャザリング離脱完了時 に実行されるGS2-Script
 	 */
-	public void setNotificationGameName(String notificationGameName) {
-		this.notificationGameName = notificationGameName;
+	public void setLeaveGatheringDoneTriggerScript(String leaveGatheringDoneTriggerScript) {
+		this.leaveGatheringDoneTriggerScript = leaveGatheringDoneTriggerScript;
 	}
 
 	/**
-	 * GS2-InGamePushNotification のゲーム名を設定
+	 * ギャザリング離脱完了時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param notificationGameName GS2-InGamePushNotification のゲーム名
+	 * @param leaveGatheringDoneTriggerScript ギャザリング離脱完了時 に実行されるGS2-Script
 	 * @return this
 	 */
-	public UpdateMatchmakingRequest withNotificationGameName(String notificationGameName) {
-		setNotificationGameName(notificationGameName);
+	public UpdateMatchmakingRequest withLeaveGatheringDoneTriggerScript(String leaveGatheringDoneTriggerScript) {
+		setLeaveGatheringDoneTriggerScript(leaveGatheringDoneTriggerScript);
+		return this;
+	}
+
+	/**
+	 * マッチメイキング成立時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return マッチメイキング成立時 に実行されるGS2-Script
+	 */
+	public String getMatchmakingCompleteTriggerScript() {
+		return matchmakingCompleteTriggerScript;
+	}
+
+	/**
+	 * マッチメイキング成立時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param matchmakingCompleteTriggerScript マッチメイキング成立時 に実行されるGS2-Script
+	 */
+	public void setMatchmakingCompleteTriggerScript(String matchmakingCompleteTriggerScript) {
+		this.matchmakingCompleteTriggerScript = matchmakingCompleteTriggerScript;
+	}
+
+	/**
+	 * マッチメイキング成立時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param matchmakingCompleteTriggerScript マッチメイキング成立時 に実行されるGS2-Script
+	 * @return this
+	 */
+	public UpdateMatchmakingRequest withMatchmakingCompleteTriggerScript(String matchmakingCompleteTriggerScript) {
+		setMatchmakingCompleteTriggerScript(matchmakingCompleteTriggerScript);
+		return this;
+	}
+
+	/**
+	 * ギャザリング参加時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ギャザリング参加時 に実行されるGS2-Script
+	 */
+	public String getJoinGatheringTriggerScript() {
+		return joinGatheringTriggerScript;
+	}
+
+	/**
+	 * ギャザリング参加時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param joinGatheringTriggerScript ギャザリング参加時 に実行されるGS2-Script
+	 */
+	public void setJoinGatheringTriggerScript(String joinGatheringTriggerScript) {
+		this.joinGatheringTriggerScript = joinGatheringTriggerScript;
+	}
+
+	/**
+	 * ギャザリング参加時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param joinGatheringTriggerScript ギャザリング参加時 に実行されるGS2-Script
+	 * @return this
+	 */
+	public UpdateMatchmakingRequest withJoinGatheringTriggerScript(String joinGatheringTriggerScript) {
+		setJoinGatheringTriggerScript(joinGatheringTriggerScript);
+		return this;
+	}
+
+	/**
+	 * マッチメイキングのサービスクラスを取得
+	 *
+	 * @return マッチメイキングのサービスクラス
+	 */
+	public String getServiceClass() {
+		return serviceClass;
+	}
+
+	/**
+	 * マッチメイキングのサービスクラスを設定
+	 *
+	 * @param serviceClass マッチメイキングのサービスクラス
+	 */
+	public void setServiceClass(String serviceClass) {
+		this.serviceClass = serviceClass;
+	}
+
+	/**
+	 * マッチメイキングのサービスクラスを設定
+	 *
+	 * @param serviceClass マッチメイキングのサービスクラス
+	 * @return this
+	 */
+	public UpdateMatchmakingRequest withServiceClass(String serviceClass) {
+		setServiceClass(serviceClass);
 		return this;
 	}
 
@@ -221,6 +332,151 @@ public class UpdateMatchmakingRequest extends Gs2BasicRequest<UpdateMatchmakingR
 	 */
 	public UpdateMatchmakingRequest withGatheringPoolName(String gatheringPoolName) {
 		setGatheringPoolName(gatheringPoolName);
+		return this;
+	}
+
+	/**
+	 * ギャザリング作成完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ギャザリング作成完了時 に実行されるGS2-Script
+	 */
+	public String getCreateGatheringDoneTriggerScript() {
+		return createGatheringDoneTriggerScript;
+	}
+
+	/**
+	 * ギャザリング作成完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param createGatheringDoneTriggerScript ギャザリング作成完了時 に実行されるGS2-Script
+	 */
+	public void setCreateGatheringDoneTriggerScript(String createGatheringDoneTriggerScript) {
+		this.createGatheringDoneTriggerScript = createGatheringDoneTriggerScript;
+	}
+
+	/**
+	 * ギャザリング作成完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param createGatheringDoneTriggerScript ギャザリング作成完了時 に実行されるGS2-Script
+	 * @return this
+	 */
+	public UpdateMatchmakingRequest withCreateGatheringDoneTriggerScript(String createGatheringDoneTriggerScript) {
+		setCreateGatheringDoneTriggerScript(createGatheringDoneTriggerScript);
+		return this;
+	}
+
+	/**
+	 * マッチメイキング完了コールバックURLを取得
+	 *
+	 * @return マッチメイキング完了コールバックURL
+	 */
+	public String getCallback() {
+		return callback;
+	}
+
+	/**
+	 * マッチメイキング完了コールバックURLを設定
+	 *
+	 * @param callback マッチメイキング完了コールバックURL
+	 */
+	public void setCallback(String callback) {
+		this.callback = callback;
+	}
+
+	/**
+	 * マッチメイキング完了コールバックURLを設定
+	 *
+	 * @param callback マッチメイキング完了コールバックURL
+	 * @return this
+	 */
+	public UpdateMatchmakingRequest withCallback(String callback) {
+		setCallback(callback);
+		return this;
+	}
+
+	/**
+	 * GS2-InGamePushNotification のゲーム名を取得
+	 *
+	 * @return GS2-InGamePushNotification のゲーム名
+	 */
+	public String getNotificationGameName() {
+		return notificationGameName;
+	}
+
+	/**
+	 * GS2-InGamePushNotification のゲーム名を設定
+	 *
+	 * @param notificationGameName GS2-InGamePushNotification のゲーム名
+	 */
+	public void setNotificationGameName(String notificationGameName) {
+		this.notificationGameName = notificationGameName;
+	}
+
+	/**
+	 * GS2-InGamePushNotification のゲーム名を設定
+	 *
+	 * @param notificationGameName GS2-InGamePushNotification のゲーム名
+	 * @return this
+	 */
+	public UpdateMatchmakingRequest withNotificationGameName(String notificationGameName) {
+		setNotificationGameName(notificationGameName);
+		return this;
+	}
+
+	/**
+	 * ギャザリング参加完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ギャザリング参加完了時 に実行されるGS2-Script
+	 */
+	public String getJoinGatheringDoneTriggerScript() {
+		return joinGatheringDoneTriggerScript;
+	}
+
+	/**
+	 * ギャザリング参加完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param joinGatheringDoneTriggerScript ギャザリング参加完了時 に実行されるGS2-Script
+	 */
+	public void setJoinGatheringDoneTriggerScript(String joinGatheringDoneTriggerScript) {
+		this.joinGatheringDoneTriggerScript = joinGatheringDoneTriggerScript;
+	}
+
+	/**
+	 * ギャザリング参加完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param joinGatheringDoneTriggerScript ギャザリング参加完了時 に実行されるGS2-Script
+	 * @return this
+	 */
+	public UpdateMatchmakingRequest withJoinGatheringDoneTriggerScript(String joinGatheringDoneTriggerScript) {
+		setJoinGatheringDoneTriggerScript(joinGatheringDoneTriggerScript);
+		return this;
+	}
+
+	/**
+	 * ギャザリング解散時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ギャザリング解散時 に実行されるGS2-Script
+	 */
+	public String getBreakupGatheringTriggerScript() {
+		return breakupGatheringTriggerScript;
+	}
+
+	/**
+	 * ギャザリング解散時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param breakupGatheringTriggerScript ギャザリング解散時 に実行されるGS2-Script
+	 */
+	public void setBreakupGatheringTriggerScript(String breakupGatheringTriggerScript) {
+		this.breakupGatheringTriggerScript = breakupGatheringTriggerScript;
+	}
+
+	/**
+	 * ギャザリング解散時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param breakupGatheringTriggerScript ギャザリング解散時 に実行されるGS2-Script
+	 * @return this
+	 */
+	public UpdateMatchmakingRequest withBreakupGatheringTriggerScript(String breakupGatheringTriggerScript) {
+		setBreakupGatheringTriggerScript(breakupGatheringTriggerScript);
 		return this;
 	}
 

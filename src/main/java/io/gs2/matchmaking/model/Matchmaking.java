@@ -30,20 +30,44 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Matchmaking implements Serializable {
 
-	/** マッチメイキング名 */
-	private String name;
+	/** 説明文 */
+	private String description;
 
-	/** マッチメイキング方式 - anybody - customauto - passcode - room */
-	private String type;
-
-	/** マッチメイキングGRN */
-	private String matchmakingId;
+	/** ギャザリング離脱完了時 に実行されるGS2-Script */
+	private String leaveGatheringDoneTriggerScript;
 
 	/** サービスクラス */
 	private String serviceClass;
 
+	/** マッチメイキングGRN */
+	private String matchmakingId;
+
+	/** ギャザリング参加完了時 に実行されるGS2-Script */
+	private String joinGatheringDoneTriggerScript;
+
+	/** 最終更新日時(エポック秒) */
+	private Integer updateAt;
+
+	/** ギャザリング作成時 に実行されるGS2-Script */
+	private String createGatheringTriggerScript;
+
+	/** ギャザリング離脱時 に実行されるGS2-Script */
+	private String leaveGatheringTriggerScript;
+
+	/** マッチメイキング名 */
+	private String name;
+
+	/** マッチメイキング成立時 に実行されるGS2-Script */
+	private String matchmakingCompleteTriggerScript;
+
+	/** ギャザリング参加時 に実行されるGS2-Script */
+	private String joinGatheringTriggerScript;
+
 	/** マッチメイキング完了時に GS2-Realtime と自動的に連携する場合に指定するギャザリングプール名 */
 	private String gatheringPoolName;
+
+	/** ギャザリング作成完了時 に実行されるGS2-Script */
+	private String createGatheringDoneTriggerScript;
 
 	/** マッチメイキング完了時の通知先URL */
 	private String callback;
@@ -60,65 +84,47 @@ public class Matchmaking implements Serializable {
 	/** オーナーID */
 	private String ownerId;
 
-	/** 最終更新日時(エポック秒) */
-	private Integer updateAt;
+	/** マッチメイキング方式 */
+	private String type;
 
-	/** 説明文 */
-	private String description;
+	/** ギャザリング解散時 に実行されるGS2-Script */
+	private String breakupGatheringTriggerScript;
 
 
 	/**
-	 * マッチメイキング名を取得
+	 * 説明文を取得
 	 *
-	 * @return マッチメイキング名
+	 * @return 説明文
 	 */
-	public String getName() {
-		return name;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
-	 * マッチメイキング名を設定
+	 * 説明文を設定
 	 *
-	 * @param name マッチメイキング名
+	 * @param description 説明文
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	/**
-	 * マッチメイキング方式 - anybody - customauto - passcode - roomを取得
+	 * ギャザリング離脱完了時 に実行されるGS2-Scriptを取得
 	 *
-	 * @return マッチメイキング方式 - anybody - customauto - passcode - room
+	 * @return ギャザリング離脱完了時 に実行されるGS2-Script
 	 */
-	public String getType() {
-		return type;
+	public String getLeaveGatheringDoneTriggerScript() {
+		return leaveGatheringDoneTriggerScript;
 	}
 
 	/**
-	 * マッチメイキング方式 - anybody - customauto - passcode - roomを設定
+	 * ギャザリング離脱完了時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param type マッチメイキング方式 - anybody - customauto - passcode - room
+	 * @param leaveGatheringDoneTriggerScript ギャザリング離脱完了時 に実行されるGS2-Script
 	 */
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	/**
-	 * マッチメイキングGRNを取得
-	 *
-	 * @return マッチメイキングGRN
-	 */
-	public String getMatchmakingId() {
-		return matchmakingId;
-	}
-
-	/**
-	 * マッチメイキングGRNを設定
-	 *
-	 * @param matchmakingId マッチメイキングGRN
-	 */
-	public void setMatchmakingId(String matchmakingId) {
-		this.matchmakingId = matchmakingId;
+	public void setLeaveGatheringDoneTriggerScript(String leaveGatheringDoneTriggerScript) {
+		this.leaveGatheringDoneTriggerScript = leaveGatheringDoneTriggerScript;
 	}
 
 	/**
@@ -140,6 +146,150 @@ public class Matchmaking implements Serializable {
 	}
 
 	/**
+	 * マッチメイキングGRNを取得
+	 *
+	 * @return マッチメイキングGRN
+	 */
+	public String getMatchmakingId() {
+		return matchmakingId;
+	}
+
+	/**
+	 * マッチメイキングGRNを設定
+	 *
+	 * @param matchmakingId マッチメイキングGRN
+	 */
+	public void setMatchmakingId(String matchmakingId) {
+		this.matchmakingId = matchmakingId;
+	}
+
+	/**
+	 * ギャザリング参加完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ギャザリング参加完了時 に実行されるGS2-Script
+	 */
+	public String getJoinGatheringDoneTriggerScript() {
+		return joinGatheringDoneTriggerScript;
+	}
+
+	/**
+	 * ギャザリング参加完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param joinGatheringDoneTriggerScript ギャザリング参加完了時 に実行されるGS2-Script
+	 */
+	public void setJoinGatheringDoneTriggerScript(String joinGatheringDoneTriggerScript) {
+		this.joinGatheringDoneTriggerScript = joinGatheringDoneTriggerScript;
+	}
+
+	/**
+	 * 最終更新日時(エポック秒)を取得
+	 *
+	 * @return 最終更新日時(エポック秒)
+	 */
+	public Integer getUpdateAt() {
+		return updateAt;
+	}
+
+	/**
+	 * 最終更新日時(エポック秒)を設定
+	 *
+	 * @param updateAt 最終更新日時(エポック秒)
+	 */
+	public void setUpdateAt(Integer updateAt) {
+		this.updateAt = updateAt;
+	}
+
+	/**
+	 * ギャザリング作成時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ギャザリング作成時 に実行されるGS2-Script
+	 */
+	public String getCreateGatheringTriggerScript() {
+		return createGatheringTriggerScript;
+	}
+
+	/**
+	 * ギャザリング作成時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param createGatheringTriggerScript ギャザリング作成時 に実行されるGS2-Script
+	 */
+	public void setCreateGatheringTriggerScript(String createGatheringTriggerScript) {
+		this.createGatheringTriggerScript = createGatheringTriggerScript;
+	}
+
+	/**
+	 * ギャザリング離脱時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ギャザリング離脱時 に実行されるGS2-Script
+	 */
+	public String getLeaveGatheringTriggerScript() {
+		return leaveGatheringTriggerScript;
+	}
+
+	/**
+	 * ギャザリング離脱時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param leaveGatheringTriggerScript ギャザリング離脱時 に実行されるGS2-Script
+	 */
+	public void setLeaveGatheringTriggerScript(String leaveGatheringTriggerScript) {
+		this.leaveGatheringTriggerScript = leaveGatheringTriggerScript;
+	}
+
+	/**
+	 * マッチメイキング名を取得
+	 *
+	 * @return マッチメイキング名
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * マッチメイキング名を設定
+	 *
+	 * @param name マッチメイキング名
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * マッチメイキング成立時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return マッチメイキング成立時 に実行されるGS2-Script
+	 */
+	public String getMatchmakingCompleteTriggerScript() {
+		return matchmakingCompleteTriggerScript;
+	}
+
+	/**
+	 * マッチメイキング成立時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param matchmakingCompleteTriggerScript マッチメイキング成立時 に実行されるGS2-Script
+	 */
+	public void setMatchmakingCompleteTriggerScript(String matchmakingCompleteTriggerScript) {
+		this.matchmakingCompleteTriggerScript = matchmakingCompleteTriggerScript;
+	}
+
+	/**
+	 * ギャザリング参加時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ギャザリング参加時 に実行されるGS2-Script
+	 */
+	public String getJoinGatheringTriggerScript() {
+		return joinGatheringTriggerScript;
+	}
+
+	/**
+	 * ギャザリング参加時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param joinGatheringTriggerScript ギャザリング参加時 に実行されるGS2-Script
+	 */
+	public void setJoinGatheringTriggerScript(String joinGatheringTriggerScript) {
+		this.joinGatheringTriggerScript = joinGatheringTriggerScript;
+	}
+
+	/**
 	 * マッチメイキング完了時に GS2-Realtime と自動的に連携する場合に指定するギャザリングプール名を取得
 	 *
 	 * @return マッチメイキング完了時に GS2-Realtime と自動的に連携する場合に指定するギャザリングプール名
@@ -155,6 +305,24 @@ public class Matchmaking implements Serializable {
 	 */
 	public void setGatheringPoolName(String gatheringPoolName) {
 		this.gatheringPoolName = gatheringPoolName;
+	}
+
+	/**
+	 * ギャザリング作成完了時 に実行されるGS2-Scriptを取得
+	 *
+	 * @return ギャザリング作成完了時 に実行されるGS2-Script
+	 */
+	public String getCreateGatheringDoneTriggerScript() {
+		return createGatheringDoneTriggerScript;
+	}
+
+	/**
+	 * ギャザリング作成完了時 に実行されるGS2-Scriptを設定
+	 *
+	 * @param createGatheringDoneTriggerScript ギャザリング作成完了時 に実行されるGS2-Script
+	 */
+	public void setCreateGatheringDoneTriggerScript(String createGatheringDoneTriggerScript) {
+		this.createGatheringDoneTriggerScript = createGatheringDoneTriggerScript;
 	}
 
 	/**
@@ -248,39 +416,39 @@ public class Matchmaking implements Serializable {
 	}
 
 	/**
-	 * 最終更新日時(エポック秒)を取得
+	 * マッチメイキング方式を取得
 	 *
-	 * @return 最終更新日時(エポック秒)
+	 * @return マッチメイキング方式
 	 */
-	public Integer getUpdateAt() {
-		return updateAt;
+	public String getType() {
+		return type;
 	}
 
 	/**
-	 * 最終更新日時(エポック秒)を設定
+	 * マッチメイキング方式を設定
 	 *
-	 * @param updateAt 最終更新日時(エポック秒)
+	 * @param type マッチメイキング方式
 	 */
-	public void setUpdateAt(Integer updateAt) {
-		this.updateAt = updateAt;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	/**
-	 * 説明文を取得
+	 * ギャザリング解散時 に実行されるGS2-Scriptを取得
 	 *
-	 * @return 説明文
+	 * @return ギャザリング解散時 に実行されるGS2-Script
 	 */
-	public String getDescription() {
-		return description;
+	public String getBreakupGatheringTriggerScript() {
+		return breakupGatheringTriggerScript;
 	}
 
 	/**
-	 * 説明文を設定
+	 * ギャザリング解散時 に実行されるGS2-Scriptを設定
 	 *
-	 * @param description 説明文
+	 * @param breakupGatheringTriggerScript ギャザリング解散時 に実行されるGS2-Script
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setBreakupGatheringTriggerScript(String breakupGatheringTriggerScript) {
+		this.breakupGatheringTriggerScript = breakupGatheringTriggerScript;
 	}
 
 }
