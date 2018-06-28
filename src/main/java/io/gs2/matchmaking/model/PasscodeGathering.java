@@ -30,24 +30,42 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class PasscodeGathering implements Serializable {
 
+	/** ギャザリングID */
+	private String gatheringId;
+
 	/** ギャザリングを作成したユーザID */
 	private String ownerUserId;
-
-	/** 作成日時(エポック秒) */
-	private Integer createAt;
-
-	/** ギャザリングGRN */
-	private String gatheringId;
 
 	/** ギャザリングに参加するために必要なパスコード */
 	private String passcode;
 
-	/** 更新日時(エポック秒) */
-	private Integer updateAt;
-
 	/** 参加プレイヤー数 */
 	private Integer joinPlayer;
 
+	/** 作成日時(エポック秒) */
+	private Integer createAt;
+
+	/** 更新日時(エポック秒) */
+	private Integer updateAt;
+
+
+	/**
+	 * ギャザリングIDを取得
+	 *
+	 * @return ギャザリングID
+	 */
+	public String getGatheringId() {
+		return gatheringId;
+	}
+
+	/**
+	 * ギャザリングIDを設定
+	 *
+	 * @param gatheringId ギャザリングID
+	 */
+	public void setGatheringId(String gatheringId) {
+		this.gatheringId = gatheringId;
+	}
 
 	/**
 	 * ギャザリングを作成したユーザIDを取得
@@ -65,42 +83,6 @@ public class PasscodeGathering implements Serializable {
 	 */
 	public void setOwnerUserId(String ownerUserId) {
 		this.ownerUserId = ownerUserId;
-	}
-
-	/**
-	 * 作成日時(エポック秒)を取得
-	 *
-	 * @return 作成日時(エポック秒)
-	 */
-	public Integer getCreateAt() {
-		return createAt;
-	}
-
-	/**
-	 * 作成日時(エポック秒)を設定
-	 *
-	 * @param createAt 作成日時(エポック秒)
-	 */
-	public void setCreateAt(Integer createAt) {
-		this.createAt = createAt;
-	}
-
-	/**
-	 * ギャザリングGRNを取得
-	 *
-	 * @return ギャザリングGRN
-	 */
-	public String getGatheringId() {
-		return gatheringId;
-	}
-
-	/**
-	 * ギャザリングGRNを設定
-	 *
-	 * @param gatheringId ギャザリングGRN
-	 */
-	public void setGatheringId(String gatheringId) {
-		this.gatheringId = gatheringId;
 	}
 
 	/**
@@ -122,24 +104,6 @@ public class PasscodeGathering implements Serializable {
 	}
 
 	/**
-	 * 更新日時(エポック秒)を取得
-	 *
-	 * @return 更新日時(エポック秒)
-	 */
-	public Integer getUpdateAt() {
-		return updateAt;
-	}
-
-	/**
-	 * 更新日時(エポック秒)を設定
-	 *
-	 * @param updateAt 更新日時(エポック秒)
-	 */
-	public void setUpdateAt(Integer updateAt) {
-		this.updateAt = updateAt;
-	}
-
-	/**
 	 * 参加プレイヤー数を取得
 	 *
 	 * @return 参加プレイヤー数
@@ -155,6 +119,42 @@ public class PasscodeGathering implements Serializable {
 	 */
 	public void setJoinPlayer(Integer joinPlayer) {
 		this.joinPlayer = joinPlayer;
+	}
+
+	/**
+	 * 作成日時(エポック秒)を取得
+	 *
+	 * @return 作成日時(エポック秒)
+	 */
+	public Integer getCreateAt() {
+		return createAt;
+	}
+
+	/**
+	 * 作成日時(エポック秒)を設定
+	 *
+	 * @param createAt 作成日時(エポック秒)
+	 */
+	public void setCreateAt(Integer createAt) {
+		this.createAt = createAt;
+	}
+
+	/**
+	 * 更新日時(エポック秒)を取得
+	 *
+	 * @return 更新日時(エポック秒)
+	 */
+	public Integer getUpdateAt() {
+		return updateAt;
+	}
+
+	/**
+	 * 更新日時(エポック秒)を設定
+	 *
+	 * @param updateAt 更新日時(エポック秒)
+	 */
+	public void setUpdateAt(Integer updateAt) {
+		this.updateAt = updateAt;
 	}
 
 }

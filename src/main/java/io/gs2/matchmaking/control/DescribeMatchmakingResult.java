@@ -27,30 +27,12 @@ import io.gs2.matchmaking.model.*;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class DescribeMatchmakingResult {
 
-	/** 次のページを読み込むためのトークン */
-	private String nextPageToken;
-
 	/** マッチメイキング */
 	private List<Matchmaking> items;
 
+	/** 次のページを読み込むためのトークン */
+	private String nextPageToken;
 
-	/**
-	 * 次のページを読み込むためのトークンを取得
-	 *
-	 * @return 次のページを読み込むためのトークン
-	 */
-	public String getNextPageToken() {
-		return nextPageToken;
-	}
-
-	/**
-	 * 次のページを読み込むためのトークンを設定
-	 *
-	 * @param nextPageToken 次のページを読み込むためのトークン
-	 */
-	public void setNextPageToken(String nextPageToken) {
-		this.nextPageToken = nextPageToken;
-	}
 
 	/**
 	 * マッチメイキングを取得
@@ -68,6 +50,24 @@ public class DescribeMatchmakingResult {
 	 */
 	public void setItems(List<Matchmaking> items) {
 		this.items = items;
+	}
+
+	/**
+	 * 次のページを読み込むためのトークンを取得
+	 *
+	 * @return 次のページを読み込むためのトークン
+	 */
+	public String getNextPageToken() {
+		return nextPageToken;
+	}
+
+	/**
+	 * 次のページを読み込むためのトークンを設定
+	 *
+	 * @param nextPageToken 次のページを読み込むためのトークン
+	 */
+	public void setNextPageToken(String nextPageToken) {
+		this.nextPageToken = nextPageToken;
 	}
 
 }

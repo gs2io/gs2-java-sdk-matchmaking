@@ -30,18 +30,54 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class AnybodyGathering implements Serializable {
 
+	/** ギャザリングID */
+	private String gatheringId;
+
+	/** 参加プレイヤー数 */
+	private Integer joinPlayer;
+
 	/** 作成日時(エポック秒) */
 	private Integer createAt;
 
 	/** 更新日時(エポック秒) */
 	private Integer updateAt;
 
-	/** 参加プレイヤー数 */
-	private Integer joinPlayer;
 
-	/** ギャザリングGRN */
-	private String gatheringId;
+	/**
+	 * ギャザリングIDを取得
+	 *
+	 * @return ギャザリングID
+	 */
+	public String getGatheringId() {
+		return gatheringId;
+	}
 
+	/**
+	 * ギャザリングIDを設定
+	 *
+	 * @param gatheringId ギャザリングID
+	 */
+	public void setGatheringId(String gatheringId) {
+		this.gatheringId = gatheringId;
+	}
+
+	/**
+	 * 参加プレイヤー数を取得
+	 *
+	 * @return 参加プレイヤー数
+	 */
+	public Integer getJoinPlayer() {
+		return joinPlayer;
+	}
+
+	/**
+	 * 参加プレイヤー数を設定
+	 *
+	 * @param joinPlayer 参加プレイヤー数
+	 */
+	public void setJoinPlayer(Integer joinPlayer) {
+		this.joinPlayer = joinPlayer;
+	}
 
 	/**
 	 * 作成日時(エポック秒)を取得
@@ -77,42 +113,6 @@ public class AnybodyGathering implements Serializable {
 	 */
 	public void setUpdateAt(Integer updateAt) {
 		this.updateAt = updateAt;
-	}
-
-	/**
-	 * 参加プレイヤー数を取得
-	 *
-	 * @return 参加プレイヤー数
-	 */
-	public Integer getJoinPlayer() {
-		return joinPlayer;
-	}
-
-	/**
-	 * 参加プレイヤー数を設定
-	 *
-	 * @param joinPlayer 参加プレイヤー数
-	 */
-	public void setJoinPlayer(Integer joinPlayer) {
-		this.joinPlayer = joinPlayer;
-	}
-
-	/**
-	 * ギャザリングGRNを取得
-	 *
-	 * @return ギャザリングGRN
-	 */
-	public String getGatheringId() {
-		return gatheringId;
-	}
-
-	/**
-	 * ギャザリングGRNを設定
-	 *
-	 * @param gatheringId ギャザリングGRN
-	 */
-	public void setGatheringId(String gatheringId) {
-		this.gatheringId = gatheringId;
 	}
 
 }

@@ -18,7 +18,9 @@ package io.gs2.matchmaking;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import io.gs2.model.Region;
 import io.gs2.util.EncodingUtil;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpDelete;
@@ -53,6 +55,26 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 	 */
 	public Gs2MatchmakingClient(IGs2Credential credential) {
 		super(credential);
+	}
+
+	/**
+	 * コンストラクタ。
+	 *
+	 * @param credential 認証情報
+	 * @param region リージョン
+	 */
+	public Gs2MatchmakingClient(IGs2Credential credential, Region region) {
+		super(credential, region);
+	}
+
+	/**
+	 * コンストラクタ。
+	 *
+	 * @param credential 認証情報
+	 * @param region リージョン
+	 */
+	public Gs2MatchmakingClient(IGs2Credential credential, String region) {
+		super(credential, region);
 	}
 
 
@@ -175,53 +197,6 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 
 
 	/**
-	 * マッチメイキングを新規作成します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 * @return 結果
-
-	 */
-
-	public CreateMatchmakingResult createMatchmaking(CreateMatchmakingRequest request) {
-
-		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("name", request.getName())
-				.put("serviceClass", request.getServiceClass())
-				.put("type", request.getType())
-				.put("maxPlayer", request.getMaxPlayer())
-				.put("callback", request.getCallback());
-
-        if(request.getDescription() != null) body.put("description", request.getDescription());
-        if(request.getGatheringPoolName() != null) body.put("gatheringPoolName", request.getGatheringPoolName());
-        if(request.getNotificationGameName() != null) body.put("notificationGameName", request.getNotificationGameName());
-        if(request.getCreateGatheringTriggerScript() != null) body.put("createGatheringTriggerScript", request.getCreateGatheringTriggerScript());
-        if(request.getCreateGatheringDoneTriggerScript() != null) body.put("createGatheringDoneTriggerScript", request.getCreateGatheringDoneTriggerScript());
-        if(request.getJoinGatheringTriggerScript() != null) body.put("joinGatheringTriggerScript", request.getJoinGatheringTriggerScript());
-        if(request.getJoinGatheringDoneTriggerScript() != null) body.put("joinGatheringDoneTriggerScript", request.getJoinGatheringDoneTriggerScript());
-        if(request.getLeaveGatheringTriggerScript() != null) body.put("leaveGatheringTriggerScript", request.getLeaveGatheringTriggerScript());
-        if(request.getLeaveGatheringDoneTriggerScript() != null) body.put("leaveGatheringDoneTriggerScript", request.getLeaveGatheringDoneTriggerScript());
-        if(request.getBreakupGatheringTriggerScript() != null) body.put("breakupGatheringTriggerScript", request.getBreakupGatheringTriggerScript());
-        if(request.getMatchmakingCompleteTriggerScript() != null) body.put("matchmakingCompleteTriggerScript", request.getMatchmakingCompleteTriggerScript());
-		HttpPost post = createHttpPost(
-				Gs2Constant.ENDPOINT_HOST + "/matchmaking",
-				credential,
-				ENDPOINT,
-				CreateMatchmakingRequest.Constant.MODULE,
-				CreateMatchmakingRequest.Constant.FUNCTION,
-				body.toString());
-        if(request.getRequestId() != null) {
-            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
-        }
-
-
-		return doRequest(post, CreateMatchmakingResult.class);
-
-	}
-
-
-	/**
 	 * ギャザリングの参加者一覧を取得します<br>
 	 * <br>
 	 * マッチメイキングが成立すると 404 Not Found 応答が返るようになります。<br>
@@ -286,24 +261,24 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 
 	public CustomAutoDoMatchmakingResult customAutoDoMatchmaking(CustomAutoDoMatchmakingRequest request) {
 
-		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("attribute1", request.getAttribute1())
-				.put("searchAttribute1Min", request.getSearchAttribute1Min())
-				.put("searchAttribute1Max", request.getSearchAttribute1Max());
-
+		ObjectNode body = JsonNodeFactory.instance.objectNode();
+        if(request.getAttribute1() != null) body.put("attribute1", request.getAttribute1());
         if(request.getAttribute2() != null) body.put("attribute2", request.getAttribute2());
         if(request.getAttribute3() != null) body.put("attribute3", request.getAttribute3());
         if(request.getAttribute4() != null) body.put("attribute4", request.getAttribute4());
         if(request.getAttribute5() != null) body.put("attribute5", request.getAttribute5());
+        if(request.getSearchAttribute1Min() != null) body.put("searchAttribute1Min", request.getSearchAttribute1Min());
         if(request.getSearchAttribute2Min() != null) body.put("searchAttribute2Min", request.getSearchAttribute2Min());
         if(request.getSearchAttribute3Min() != null) body.put("searchAttribute3Min", request.getSearchAttribute3Min());
         if(request.getSearchAttribute4Min() != null) body.put("searchAttribute4Min", request.getSearchAttribute4Min());
         if(request.getSearchAttribute5Min() != null) body.put("searchAttribute5Min", request.getSearchAttribute5Min());
+        if(request.getSearchAttribute1Max() != null) body.put("searchAttribute1Max", request.getSearchAttribute1Max());
         if(request.getSearchAttribute2Max() != null) body.put("searchAttribute2Max", request.getSearchAttribute2Max());
         if(request.getSearchAttribute3Max() != null) body.put("searchAttribute3Max", request.getSearchAttribute3Max());
         if(request.getSearchAttribute4Max() != null) body.put("searchAttribute4Max", request.getSearchAttribute4Max());
         if(request.getSearchAttribute5Max() != null) body.put("searchAttribute5Max", request.getSearchAttribute5Max());
         if(request.getSearchContext() != null) body.put("searchContext", request.getSearchContext());
+
 		HttpPost post = createHttpPost(
 				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null || request.getMatchmakingName().equals("") ? "null" : request.getMatchmakingName()) + "/customauto",
 				credential,
@@ -356,6 +331,53 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
         delete.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 
 		doRequest(delete, null);
+
+	}
+
+
+	/**
+	 * マッチメイキングを新規作成します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public CreateMatchmakingResult createMatchmaking(CreateMatchmakingRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("name", request.getName())
+				.put("serviceClass", request.getServiceClass())
+				.put("type", request.getType())
+				.put("maxPlayer", request.getMaxPlayer());
+        if(request.getDescription() != null) body.put("description", request.getDescription());
+        if(request.getGatheringPoolName() != null) body.put("gatheringPoolName", request.getGatheringPoolName());
+        if(request.getCallback() != null) body.put("callback", request.getCallback());
+        if(request.getNotificationGameName() != null) body.put("notificationGameName", request.getNotificationGameName());
+        if(request.getCreateGatheringTriggerScript() != null) body.put("createGatheringTriggerScript", request.getCreateGatheringTriggerScript());
+        if(request.getCreateGatheringDoneTriggerScript() != null) body.put("createGatheringDoneTriggerScript", request.getCreateGatheringDoneTriggerScript());
+        if(request.getJoinGatheringTriggerScript() != null) body.put("joinGatheringTriggerScript", request.getJoinGatheringTriggerScript());
+        if(request.getJoinGatheringDoneTriggerScript() != null) body.put("joinGatheringDoneTriggerScript", request.getJoinGatheringDoneTriggerScript());
+        if(request.getLeaveGatheringTriggerScript() != null) body.put("leaveGatheringTriggerScript", request.getLeaveGatheringTriggerScript());
+        if(request.getLeaveGatheringDoneTriggerScript() != null) body.put("leaveGatheringDoneTriggerScript", request.getLeaveGatheringDoneTriggerScript());
+        if(request.getBreakupGatheringTriggerScript() != null) body.put("breakupGatheringTriggerScript", request.getBreakupGatheringTriggerScript());
+        if(request.getMatchmakingCompleteTriggerScript() != null) body.put("matchmakingCompleteTriggerScript", request.getMatchmakingCompleteTriggerScript());
+
+		HttpPost post = createHttpPost(
+				Gs2Constant.ENDPOINT_HOST + "/matchmaking",
+				credential,
+				ENDPOINT,
+				CreateMatchmakingRequest.Constant.MODULE,
+				CreateMatchmakingRequest.Constant.FUNCTION,
+				body.toString());
+        if(request.getRequestId() != null) {
+            post.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(post, CreateMatchmakingResult.class);
 
 	}
 
@@ -520,6 +542,49 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 
 
 		return doRequest(get, GetMatchmakingStatusResult.class);
+
+	}
+
+
+	/**
+	 * マッチメイキングを更新します<br>
+	 * <br>
+	 *
+	 * @param request リクエストパラメータ
+
+	 * @return 結果
+
+	 */
+
+	public UpdateMatchmakingResult updateMatchmaking(UpdateMatchmakingRequest request) {
+
+		ObjectNode body = JsonNodeFactory.instance.objectNode()
+				.put("serviceClass", request.getServiceClass());
+        if(request.getDescription() != null) body.put("description", request.getDescription());
+        if(request.getGatheringPoolName() != null) body.put("gatheringPoolName", request.getGatheringPoolName());
+        if(request.getCallback() != null) body.put("callback", request.getCallback());
+        if(request.getNotificationGameName() != null) body.put("notificationGameName", request.getNotificationGameName());
+        if(request.getCreateGatheringTriggerScript() != null) body.put("createGatheringTriggerScript", request.getCreateGatheringTriggerScript());
+        if(request.getCreateGatheringDoneTriggerScript() != null) body.put("createGatheringDoneTriggerScript", request.getCreateGatheringDoneTriggerScript());
+        if(request.getJoinGatheringTriggerScript() != null) body.put("joinGatheringTriggerScript", request.getJoinGatheringTriggerScript());
+        if(request.getJoinGatheringDoneTriggerScript() != null) body.put("joinGatheringDoneTriggerScript", request.getJoinGatheringDoneTriggerScript());
+        if(request.getLeaveGatheringTriggerScript() != null) body.put("leaveGatheringTriggerScript", request.getLeaveGatheringTriggerScript());
+        if(request.getLeaveGatheringDoneTriggerScript() != null) body.put("leaveGatheringDoneTriggerScript", request.getLeaveGatheringDoneTriggerScript());
+        if(request.getBreakupGatheringTriggerScript() != null) body.put("breakupGatheringTriggerScript", request.getBreakupGatheringTriggerScript());
+        if(request.getMatchmakingCompleteTriggerScript() != null) body.put("matchmakingCompleteTriggerScript", request.getMatchmakingCompleteTriggerScript());
+		HttpPut put = createHttpPut(
+				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null || request.getMatchmakingName().equals("") ? "null" : request.getMatchmakingName()) + "",
+				credential,
+				ENDPOINT,
+				UpdateMatchmakingRequest.Constant.MODULE,
+				UpdateMatchmakingRequest.Constant.FUNCTION,
+				body.toString());
+        if(request.getRequestId() != null) {
+            put.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
+        }
+
+
+		return doRequest(put, UpdateMatchmakingResult.class);
 
 	}
 
@@ -785,8 +850,8 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
 
 	public RoomCreateGatheringResult roomCreateGathering(RoomCreateGatheringRequest request) {
 
-		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("meta", request.getMeta());
+		ObjectNode body = JsonNodeFactory.instance.objectNode();
+        if(request.getMeta() != null) body.put("meta", request.getMeta());
 
 		HttpPost post = createHttpPost(
 				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null || request.getMatchmakingName().equals("") ? "null" : request.getMatchmakingName()) + "/room",
@@ -986,50 +1051,6 @@ public class Gs2MatchmakingClient extends AbstractGs2Client<Gs2MatchmakingClient
         delete.setHeader("X-GS2-ACCESS-TOKEN", request.getAccessToken());
 
 		doRequest(delete, null);
-
-	}
-
-
-	/**
-	 * マッチメイキングを更新します<br>
-	 * <br>
-	 *
-	 * @param request リクエストパラメータ
-
-	 * @return 結果
-
-	 */
-
-	public UpdateMatchmakingResult updateMatchmaking(UpdateMatchmakingRequest request) {
-
-		ObjectNode body = JsonNodeFactory.instance.objectNode()
-				.put("serviceClass", request.getServiceClass())
-				.put("callback", request.getCallback());
-
-        if(request.getDescription() != null) body.put("description", request.getDescription());
-        if(request.getGatheringPoolName() != null) body.put("gatheringPoolName", request.getGatheringPoolName());
-        if(request.getNotificationGameName() != null) body.put("notificationGameName", request.getNotificationGameName());
-        if(request.getCreateGatheringTriggerScript() != null) body.put("createGatheringTriggerScript", request.getCreateGatheringTriggerScript());
-        if(request.getCreateGatheringDoneTriggerScript() != null) body.put("createGatheringDoneTriggerScript", request.getCreateGatheringDoneTriggerScript());
-        if(request.getJoinGatheringTriggerScript() != null) body.put("joinGatheringTriggerScript", request.getJoinGatheringTriggerScript());
-        if(request.getJoinGatheringDoneTriggerScript() != null) body.put("joinGatheringDoneTriggerScript", request.getJoinGatheringDoneTriggerScript());
-        if(request.getLeaveGatheringTriggerScript() != null) body.put("leaveGatheringTriggerScript", request.getLeaveGatheringTriggerScript());
-        if(request.getLeaveGatheringDoneTriggerScript() != null) body.put("leaveGatheringDoneTriggerScript", request.getLeaveGatheringDoneTriggerScript());
-        if(request.getBreakupGatheringTriggerScript() != null) body.put("breakupGatheringTriggerScript", request.getBreakupGatheringTriggerScript());
-        if(request.getMatchmakingCompleteTriggerScript() != null) body.put("matchmakingCompleteTriggerScript", request.getMatchmakingCompleteTriggerScript());
-		HttpPut put = createHttpPut(
-				Gs2Constant.ENDPOINT_HOST + "/matchmaking/" + (request.getMatchmakingName() == null || request.getMatchmakingName().equals("") ? "null" : request.getMatchmakingName()) + "",
-				credential,
-				ENDPOINT,
-				UpdateMatchmakingRequest.Constant.MODULE,
-				UpdateMatchmakingRequest.Constant.FUNCTION,
-				body.toString());
-        if(request.getRequestId() != null) {
-            put.setHeader("X-GS2-REQUEST-ID", request.getRequestId());
-        }
-
-
-		return doRequest(put, UpdateMatchmakingResult.class);
 
 	}
 

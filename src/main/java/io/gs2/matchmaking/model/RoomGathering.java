@@ -30,19 +30,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class RoomGathering implements Serializable {
 
-	/** ギャザリングメタデータ
-ルームの募集条件などを 128バイト以内で指定できます。
- */
-	private String meta;
-
-	/** ギャザリングGRN */
+	/** ギャザリングID */
 	private String gatheringId;
 
 	/** ギャザリングを作成したユーザID */
 	private String ownerUserId;
 
-	/** 更新日時(エポック秒) */
-	private Integer updateAt;
+	/** ギャザリングメタデータ */
+	private String meta;
 
 	/** 参加プレイヤー数 */
 	private Integer joinPlayer;
@@ -50,46 +45,23 @@ public class RoomGathering implements Serializable {
 	/** 作成日時(エポック秒) */
 	private Integer createAt;
 
+	/** 更新日時(エポック秒) */
+	private Integer updateAt;
+
 
 	/**
-	 * ギャザリングメタデータ
-ルームの募集条件などを 128バイト以内で指定できます。
-を取得
+	 * ギャザリングIDを取得
 	 *
-	 * @return ギャザリングメタデータ
-ルームの募集条件などを 128バイト以内で指定できます。
-
-	 */
-	public String getMeta() {
-		return meta;
-	}
-
-	/**
-	 * ギャザリングメタデータ
-ルームの募集条件などを 128バイト以内で指定できます。
-を設定
-	 *
-	 * @param meta ギャザリングメタデータ
-ルームの募集条件などを 128バイト以内で指定できます。
-
-	 */
-	public void setMeta(String meta) {
-		this.meta = meta;
-	}
-
-	/**
-	 * ギャザリングGRNを取得
-	 *
-	 * @return ギャザリングGRN
+	 * @return ギャザリングID
 	 */
 	public String getGatheringId() {
 		return gatheringId;
 	}
 
 	/**
-	 * ギャザリングGRNを設定
+	 * ギャザリングIDを設定
 	 *
-	 * @param gatheringId ギャザリングGRN
+	 * @param gatheringId ギャザリングID
 	 */
 	public void setGatheringId(String gatheringId) {
 		this.gatheringId = gatheringId;
@@ -114,21 +86,21 @@ public class RoomGathering implements Serializable {
 	}
 
 	/**
-	 * 更新日時(エポック秒)を取得
+	 * ギャザリングメタデータを取得
 	 *
-	 * @return 更新日時(エポック秒)
+	 * @return ギャザリングメタデータ
 	 */
-	public Integer getUpdateAt() {
-		return updateAt;
+	public String getMeta() {
+		return meta;
 	}
 
 	/**
-	 * 更新日時(エポック秒)を設定
+	 * ギャザリングメタデータを設定
 	 *
-	 * @param updateAt 更新日時(エポック秒)
+	 * @param meta ギャザリングメタデータ
 	 */
-	public void setUpdateAt(Integer updateAt) {
-		this.updateAt = updateAt;
+	public void setMeta(String meta) {
+		this.meta = meta;
 	}
 
 	/**
@@ -165,6 +137,24 @@ public class RoomGathering implements Serializable {
 	 */
 	public void setCreateAt(Integer createAt) {
 		this.createAt = createAt;
+	}
+
+	/**
+	 * 更新日時(エポック秒)を取得
+	 *
+	 * @return 更新日時(エポック秒)
+	 */
+	public Integer getUpdateAt() {
+		return updateAt;
+	}
+
+	/**
+	 * 更新日時(エポック秒)を設定
+	 *
+	 * @param updateAt 更新日時(エポック秒)
+	 */
+	public void setUpdateAt(Integer updateAt) {
+		this.updateAt = updateAt;
 	}
 
 }

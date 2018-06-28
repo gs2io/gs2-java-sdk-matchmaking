@@ -27,32 +27,32 @@ import io.gs2.matchmaking.model.*;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class CustomAutoDoMatchmakingResult {
 
-	/** 検索を再開するためのコンテキスト */
-	private String searchContext;
+	/** マッチメイキングが完了したか */
+	private Boolean done;
 
 	/** CustomAutoマッチメイキング ギャザリング */
 	private CustomAutoGathering item;
 
-	/** マッチメイキングが完了したか */
-	private Boolean done;
+	/** 検索を再開するためのコンテキスト */
+	private String searchContext;
 
 
 	/**
-	 * 検索を再開するためのコンテキストを取得
+	 * マッチメイキングが完了したかを取得
 	 *
-	 * @return 検索を再開するためのコンテキスト
+	 * @return マッチメイキングが完了したか
 	 */
-	public String getSearchContext() {
-		return searchContext;
+	public Boolean getDone() {
+		return done;
 	}
 
 	/**
-	 * 検索を再開するためのコンテキストを設定
+	 * マッチメイキングが完了したかを設定
 	 *
-	 * @param searchContext 検索を再開するためのコンテキスト
+	 * @param done マッチメイキングが完了したか
 	 */
-	public void setSearchContext(String searchContext) {
-		this.searchContext = searchContext;
+	public void setDone(Boolean done) {
+		this.done = done;
 	}
 
 	/**
@@ -74,21 +74,21 @@ public class CustomAutoDoMatchmakingResult {
 	}
 
 	/**
-	 * マッチメイキングが完了したかを取得
+	 * 検索を再開するためのコンテキストを取得
 	 *
-	 * @return マッチメイキングが完了したか
+	 * @return 検索を再開するためのコンテキスト
 	 */
-	public Boolean getDone() {
-		return done;
+	public String getSearchContext() {
+		return searchContext;
 	}
 
 	/**
-	 * マッチメイキングが完了したかを設定
+	 * 検索を再開するためのコンテキストを設定
 	 *
-	 * @param done マッチメイキングが完了したか
+	 * @param searchContext 検索を再開するためのコンテキスト
 	 */
-	public void setDone(Boolean done) {
-		this.done = done;
+	public void setSearchContext(String searchContext) {
+		this.searchContext = searchContext;
 	}
 
 }

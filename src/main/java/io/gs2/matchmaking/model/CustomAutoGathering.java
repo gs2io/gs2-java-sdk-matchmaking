@@ -30,11 +30,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class CustomAutoGathering implements Serializable {
 
-	/** 作成日時(エポック秒) */
-	private Integer createAt;
-
-	/** ギャザリングGRN */
+	/** ギャザリングID */
 	private String gatheringId;
+
+	/** 属性値1 */
+	private Integer attribute1;
 
 	/** 属性値2 */
 	private Integer attribute2;
@@ -42,56 +42,56 @@ public class CustomAutoGathering implements Serializable {
 	/** 属性値3 */
 	private Integer attribute3;
 
-	/** 属性値1 */
-	private Integer attribute1;
-
-	/** 更新日時(エポック秒) */
-	private Integer updateAt;
-
-	/** 参加プレイヤー数 */
-	private Integer joinPlayer;
-
 	/** 属性値4 */
 	private Integer attribute4;
 
 	/** 属性値5 */
 	private Integer attribute5;
 
+	/** 参加プレイヤー数 */
+	private Integer joinPlayer;
+
+	/** 作成日時(エポック秒) */
+	private Integer createAt;
+
+	/** 更新日時(エポック秒) */
+	private Integer updateAt;
+
 
 	/**
-	 * 作成日時(エポック秒)を取得
+	 * ギャザリングIDを取得
 	 *
-	 * @return 作成日時(エポック秒)
-	 */
-	public Integer getCreateAt() {
-		return createAt;
-	}
-
-	/**
-	 * 作成日時(エポック秒)を設定
-	 *
-	 * @param createAt 作成日時(エポック秒)
-	 */
-	public void setCreateAt(Integer createAt) {
-		this.createAt = createAt;
-	}
-
-	/**
-	 * ギャザリングGRNを取得
-	 *
-	 * @return ギャザリングGRN
+	 * @return ギャザリングID
 	 */
 	public String getGatheringId() {
 		return gatheringId;
 	}
 
 	/**
-	 * ギャザリングGRNを設定
+	 * ギャザリングIDを設定
 	 *
-	 * @param gatheringId ギャザリングGRN
+	 * @param gatheringId ギャザリングID
 	 */
 	public void setGatheringId(String gatheringId) {
 		this.gatheringId = gatheringId;
+	}
+
+	/**
+	 * 属性値1を取得
+	 *
+	 * @return 属性値1
+	 */
+	public Integer getAttribute1() {
+		return attribute1;
+	}
+
+	/**
+	 * 属性値1を設定
+	 *
+	 * @param attribute1 属性値1
+	 */
+	public void setAttribute1(Integer attribute1) {
+		this.attribute1 = attribute1;
 	}
 
 	/**
@@ -131,60 +131,6 @@ public class CustomAutoGathering implements Serializable {
 	}
 
 	/**
-	 * 属性値1を取得
-	 *
-	 * @return 属性値1
-	 */
-	public Integer getAttribute1() {
-		return attribute1;
-	}
-
-	/**
-	 * 属性値1を設定
-	 *
-	 * @param attribute1 属性値1
-	 */
-	public void setAttribute1(Integer attribute1) {
-		this.attribute1 = attribute1;
-	}
-
-	/**
-	 * 更新日時(エポック秒)を取得
-	 *
-	 * @return 更新日時(エポック秒)
-	 */
-	public Integer getUpdateAt() {
-		return updateAt;
-	}
-
-	/**
-	 * 更新日時(エポック秒)を設定
-	 *
-	 * @param updateAt 更新日時(エポック秒)
-	 */
-	public void setUpdateAt(Integer updateAt) {
-		this.updateAt = updateAt;
-	}
-
-	/**
-	 * 参加プレイヤー数を取得
-	 *
-	 * @return 参加プレイヤー数
-	 */
-	public Integer getJoinPlayer() {
-		return joinPlayer;
-	}
-
-	/**
-	 * 参加プレイヤー数を設定
-	 *
-	 * @param joinPlayer 参加プレイヤー数
-	 */
-	public void setJoinPlayer(Integer joinPlayer) {
-		this.joinPlayer = joinPlayer;
-	}
-
-	/**
 	 * 属性値4を取得
 	 *
 	 * @return 属性値4
@@ -218,6 +164,60 @@ public class CustomAutoGathering implements Serializable {
 	 */
 	public void setAttribute5(Integer attribute5) {
 		this.attribute5 = attribute5;
+	}
+
+	/**
+	 * 参加プレイヤー数を取得
+	 *
+	 * @return 参加プレイヤー数
+	 */
+	public Integer getJoinPlayer() {
+		return joinPlayer;
+	}
+
+	/**
+	 * 参加プレイヤー数を設定
+	 *
+	 * @param joinPlayer 参加プレイヤー数
+	 */
+	public void setJoinPlayer(Integer joinPlayer) {
+		this.joinPlayer = joinPlayer;
+	}
+
+	/**
+	 * 作成日時(エポック秒)を取得
+	 *
+	 * @return 作成日時(エポック秒)
+	 */
+	public Integer getCreateAt() {
+		return createAt;
+	}
+
+	/**
+	 * 作成日時(エポック秒)を設定
+	 *
+	 * @param createAt 作成日時(エポック秒)
+	 */
+	public void setCreateAt(Integer createAt) {
+		this.createAt = createAt;
+	}
+
+	/**
+	 * 更新日時(エポック秒)を取得
+	 *
+	 * @return 更新日時(エポック秒)
+	 */
+	public Integer getUpdateAt() {
+		return updateAt;
+	}
+
+	/**
+	 * 更新日時(エポック秒)を設定
+	 *
+	 * @param updateAt 更新日時(エポック秒)
+	 */
+	public void setUpdateAt(Integer updateAt) {
+		this.updateAt = updateAt;
 	}
 
 }
